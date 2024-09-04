@@ -1,16 +1,14 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <h1 class="mb-4">Postagens</h1>
 
-<% content_for :title, "Postagems" %>
-
-<h1>Postagems</h1>
-
-<div id="postagems">
-  <% @postagems.each do |postagem| %>
-    <%= render postagem %>
-    <p>
-      <%= link_to "Show this postagem", postagem %>
-    </p>
+  <% @postagens.each do |postagem| %>
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title"><%= postagem.title %></h5>
+        <p class="card-text"><%= postagem.content.truncate(150) %></p>
+        <p class="text-muted">Postado por <%= postagem.user.email %> em <%= postagem.created_at.strftime("%d/%m/%Y") %></p>
+        <%= link_to 'Ver Postagem', postagem_path(postagem), class: 'btn btn-primary' %>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New postagem", new_postagem_path %>

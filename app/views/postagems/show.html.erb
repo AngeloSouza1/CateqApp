@@ -1,10 +1,34 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <h1><%= @postagem.title %></h1>
+  <p class="text-muted">Postado por <%= @postagem.user.email %> em <%= @postagem.created_at.strftime("%d/%m/%Y") %></p>
+  <hr>
+  <div class="content mb-4">
+    <p><%= simple_format(@postagem.content) %></p>
+  </div>
 
-<%= render @postagem %>
+  <h3>Comentários</h3>
+  <hr>
+  <div class="comments">
+    <% @postagem.comentarios.each do |comentario| %>
+      <div class="mb-3">
+        <strong><%= comentario.user.email %>:</strong>
+        <p><%= comentario.content %></p>
+      </div>
+    <% end %>
+  </div>
 
-<div>
-  <%= link_to "Edit this postagem", edit_postagem_path(@postagem) %> |
-  <%= link_to "Back to postagems", postagems_path %>
+  <% if user_signed_in? %>
+    <%= form_with(model: [ @postagem, Comentario.new ], local: true) do |form| %>
+      <div class="form-group">
+        <%= form.label :content, "Comentar" %>
+        <%= form.text_area :content, class: "form-control", rows: 3 %>
+      </div>
 
-  <%= button_to "Destroy this postagem", @postagem, method: :delete %>
+      <%= form.submit "Comentar", class: "btn btn-primary mt-3" %>
+    <% end %>
+  <% else %>
+    <p>Faça <%= link_to "login", new_user_session_path %> para comentar nesta postagem.</p>
+  <% end %>
+
+  <%= link_to 'Voltar para Postagens', postagens_path, class: 'btn btn-secondary mt-3' %>
 </div>

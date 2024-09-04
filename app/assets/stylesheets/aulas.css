@@ -1,0 +1,29 @@
+/* Estilos personalizados para os cards de aulas */
+.card-custom {
+  height: 300px; /* Altura fixa dos cards */
+  max-width: 18rem; /* Largura máxima dos cards */
+  margin-bottom: 20px; /* Espaçamento entre os cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Alinha o conteúdo do card */
+  text-align: center; /* Centraliza o texto dentro do card */
+}
+
+.card-body-custom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente */
+  flex-grow: 1; /* Faz o conteúdo preencher o espaço disponível */
+}
+
+/* Centraliza o título e a descrição */
+.card-title,
+.card-text {
+  text-align: center;
+  margin-bottom: 10px; /* Espaço entre o título e a descrição */
+}
+
+/* Garante que o botão fique no final do card */
+.card-custom .btn {
+  margin-top: auto; /* Garante que o botão fique no final */
+}

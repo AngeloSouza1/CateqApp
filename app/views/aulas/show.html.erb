@@ -1,10 +1,9 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <h1><%= @aula.title %></h1>
+  <hr>
+  <div class="content">
+    <p><%= simple_format(@aula.content) %></p>
+  </div>
 
-<%= render @aula %>
-
-<div>
-  <%= link_to "Edit this aula", edit_aula_path(@aula) %> |
-  <%= link_to "Back to aulas", aulas_path %>
-
-  <%= button_to "Destroy this aula", @aula, method: :delete %>
+  <%= link_to 'Voltar para Aulas', aulas_path, class: 'btn btn-secondary mt-3' %>
 </div>

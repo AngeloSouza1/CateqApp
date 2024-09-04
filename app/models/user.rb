@@ -9,5 +9,6 @@ class User < ApplicationRecord
 
   has_many :mensagens
   has_many :postagens
+  has_many :aulas
 
 end
