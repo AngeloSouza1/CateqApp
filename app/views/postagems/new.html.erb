@@ -1,0 +1,11 @@
+<% content_for :title, "New postagem" %>
+
+<h1>New postagem</h1>
+
+<%= render "form", postagem: @postagem %>
+
+<br>
+
+<div>
+  <%= link_to "Back to postagems", postagems_path %>
+</div>
