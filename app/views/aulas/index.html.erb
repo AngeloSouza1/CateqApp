@@ -22,7 +22,9 @@
 
     <!-- Conteúdo principal (Aulas) -->
     <div class="col-md-8 offset-md-2">
-      <h1 class="mb-4">Aulas</h1>
+      <header class="page-header">
+        <h1 class="page-title">Aulas</h1>
+      </header>
 
       <!-- Adicionando a área de rolagem para todos os cards -->
       <div class="row card-container">
@@ -42,11 +44,22 @@
 
     <!-- Coluna para o banner à direita -->
     <div class="col-md-2">
+      <!-- Div para exibir a data e hora do encontro -->
+      <div class="date-time-container">
+        <h3>Encontro</h3>
+        
+        <p><%= Time.now.strftime("%d/%m/%Y - %H:%M") %></p> <!-- Exibe a data e a hora atuais -->
+      </div>
+
+      <!-- Banner abaixo da data e hora -->
       <div class="banner">
         <div class="banner-content">
-          <h2>Banner de Imagem</h2>
-          <p>Este espaço será utilizado para um banner futuro.</p>
-          <img src="https://via.placeholder.com/300x300" alt="Imagem de exemplo" class="img-fluid">
+          <h2>Bem-vindo!</h2>
+          <p>
+          <p>Este espaço é utilizado para suas aulas e tarefas!</p>
+          <br>
+  
+          <%= image_tag "imag3.jpg", alt: "Imagem do Banner", class: "img-fluid" %>
         </div>
       </div>
     </div>
