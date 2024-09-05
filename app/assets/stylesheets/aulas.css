@@ -1,29 +1,79 @@
-/* Estilos personalizados para os cards de aulas */
-.card-custom {
-  height: 300px; /* Altura fixa dos cards */
-  max-width: 18rem; /* Largura máxima dos cards */
-  margin-bottom: 20px; /* Espaçamento entre os cards */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Alinha o conteúdo do card */
-  text-align: center; /* Centraliza o texto dentro do card */
+/* Define a altura máxima da área de cards e permite rolagem */
+.card-container {
+  max-height: 600px; /* Altura máxima da área onde os cards são exibidos */
+  overflow-y: auto; /* Permite a rolagem vertical se o conteúdo ultrapassar a altura */
+  padding-right: 15px; /* Garante que a rolagem não sobreponha o conteúdo */
 }
 
+/* Estilos personalizados para os cards */
+.card-custom {
+  height: 350px; /* Altura fixa dos cards */
+  max-width: 95%; /* Aumenta a largura dos cards */
+  margin-bottom: 30px; /* Espaçamento vertical entre os cards */
+  margin-left: auto; /* Centraliza horizontalmente */
+  margin-right: auto; /* Centraliza horizontalmente */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left; /* Alinha o texto à esquerda */
+  padding: 15px; /* Aumenta o padding interno */
+}
+
+/* Estilos para o corpo do card */
 .card-body-custom {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centraliza verticalmente */
+  justify-content: flex-start; /* Garante que o conteúdo comece do topo */
   flex-grow: 1; /* Faz o conteúdo preencher o espaço disponível */
 }
 
-/* Centraliza o título e a descrição */
-.card-title,
+/* Centraliza o título no topo e a descrição logo abaixo */
+.card-title {
+  margin-bottom: 10px; /* Pequeno espaço entre o título e a descrição */
+  text-align: left; /* Alinhado à esquerda */
+}
+
 .card-text {
-  text-align: center;
-  margin-bottom: 10px; /* Espaço entre o título e a descrição */
+  text-align: left;
+  margin-bottom: 10px; /* Espaçamento entre a descrição e o botão */
 }
 
 /* Garante que o botão fique no final do card */
 .card-custom .btn {
   margin-top: auto; /* Garante que o botão fique no final */
+}
+
+/* Estilos para o banner à direita */
+.banner {
+  position: absolute;
+  right: 0;
+  top: 100px;
+  width: 250px; /* Ajusta a largura do banner para caber em 2 colunas */
+  height: 700px; /* Aumenta a altura da div do banner */
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para dar destaque */
+}
+
+/* Estilo para o conteúdo do banner */
+.banner-content h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #343a40;
+}
+
+.banner-content p {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/* Estilo para a imagem do banner */
+.banner img {
+  margin-top: 15px;
+  max-width: 100%;
+  height: auto; /* A altura da imagem vai se ajustar proporcionalmente */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

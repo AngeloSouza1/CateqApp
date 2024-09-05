@@ -1,17 +1,36 @@
 <div class="container mt-5">
-  <h1 class="mb-4">Aulas</h1>
-
   <div class="row">
-    <% @aulas.each do |aula| %>
-      <div class="col-md-4">
-        <div class="card card-custom">
-          <div class="card-body card-body-custom">
-            <h5 class="card-title"><%= aula.title %></h5>
-            <p class="card-text"><%= aula.content.truncate(100) %></p>
-            <%= link_to 'Ver Aula', aula_path(aula), class: 'btn btn-primary mt-auto' %>
+    
+    <!-- Coluna para as Aulas (10 colunas) -->
+    <div class="col-md-10">
+      <h1 class="mb-4">Aulas</h1>
+
+      <!-- Adicionando a área de rolagem para todos os cards -->
+      <div class="row card-container">
+        <% @aulas.each do |aula| %>
+          <div class="col-md-4">
+            <div class="card card-custom">
+              <div class="card-body card-body-custom">
+                <h5 class="card-title"><%= aula.title %></h5>
+                <p class="card-text"><%= aula.content.truncate(100) %></p>
+              </div>
+              <%= link_to 'Ver Aula', aula_path(aula), class: 'btn btn-primary mt-auto' %>
+            </div>
           </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Coluna para o banner à direita (2 colunas) -->
+    <div class="col-md-2">
+      <div class="banner">
+        <div class="banner-content">
+          <h2>Banner de Imagem</h2>
+          <p>Este espaço será utilizado para um banner futuro.</p>
+          <img src="https://via.placeholder.com/300x300" alt="Imagem de exemplo" class="img-fluid">
         </div>
       </div>
-    <% end %>
+    </div>
+
   </div>
 </div>
