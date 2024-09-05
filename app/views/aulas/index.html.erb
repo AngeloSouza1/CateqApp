@@ -1,14 +1,33 @@
-<div class="container mt-5">
+<div class="container-fluid mt-5">
   <div class="row">
     
-    <!-- Coluna para as Aulas (10 colunas) -->
-    <div class="col-md-10">
+    <!-- Sidebar fixa à esquerda -->
+    <div class="col-md-2 sidebar">
+      <h3>Links</h3>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <%= link_to 'Home', root_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Aulas', aulas_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Postagens', postagens_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Mensagens', mensagens_path, class: 'nav-link' %>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Conteúdo principal (Aulas) -->
+    <div class="col-md-8 offset-md-2">
       <h1 class="mb-4">Aulas</h1>
 
       <!-- Adicionando a área de rolagem para todos os cards -->
       <div class="row card-container">
         <% @aulas.each do |aula| %>
-          <div class="col-md-4">
+          <div class="col-md-4"> <!-- Garante 3 cards por linha -->
             <div class="card card-custom">
               <div class="card-body card-body-custom">
                 <h5 class="card-title"><%= aula.title %></h5>
@@ -21,7 +40,7 @@
       </div>
     </div>
 
-    <!-- Coluna para o banner à direita (2 colunas) -->
+    <!-- Coluna para o banner à direita -->
     <div class="col-md-2">
       <div class="banner">
         <div class="banner-content">

@@ -1,79 +1,82 @@
-/* Define a altura máxima da área de cards e permite rolagem */
+/* Sidebar fixa à esquerda */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh; /* Sidebar ocupará toda a altura da página */
+  width: 200px; /* Largura da sidebar */
+  background-color: #f8f9fa; /* Cor de fundo leve */
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombras para destaque */
+}
+
+/* Espaçamento adicional para o conteúdo principal */
+.offset-md-2 {
+  margin-left: 220px; /* Compensa a largura da sidebar */
+}
+
+/* Scroll lock aplicado à div dos cards */
 .card-container {
-  max-height: 600px; /* Altura máxima da área onde os cards são exibidos */
-  overflow-y: auto; /* Permite a rolagem vertical se o conteúdo ultrapassar a altura */
-  padding-right: 15px; /* Garante que a rolagem não sobreponha o conteúdo */
+  max-height: 600px; /* Limita a altura dos cards */
+  overflow-y: scroll; /* Habilita rolagem interna */
+  padding-right: 15px; /* Evita que a rolagem sobreponha o conteúdo */
+  padding-left: 15px;  /* Adiciona padding à esquerda */
 }
 
 /* Estilos personalizados para os cards */
 .card-custom {
   height: 350px; /* Altura fixa dos cards */
-  max-width: 95%; /* Aumenta a largura dos cards */
+  max-width: 100%; /* Garante que o card ocupe 100% da coluna */
   margin-bottom: 30px; /* Espaçamento vertical entre os cards */
-  margin-left: auto; /* Centraliza horizontalmente */
-  margin-right: auto; /* Centraliza horizontalmente */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  text-align: left; /* Alinha o texto à esquerda */
-  padding: 15px; /* Aumenta o padding interno */
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra aos cards */
 }
 
-/* Estilos para o corpo do card */
+/* Centralização e estilo do conteúdo dos cards */
 .card-body-custom {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Garante que o conteúdo comece do topo */
-  flex-grow: 1; /* Faz o conteúdo preencher o espaço disponível */
+  justify-content: flex-start;
+  flex-grow: 1;
 }
 
-/* Centraliza o título no topo e a descrição logo abaixo */
 .card-title {
-  margin-bottom: 10px; /* Pequeno espaço entre o título e a descrição */
-  text-align: left; /* Alinhado à esquerda */
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .card-text {
-  text-align: left;
-  margin-bottom: 10px; /* Espaçamento entre a descrição e o botão */
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 /* Garante que o botão fique no final do card */
 .card-custom .btn {
-  margin-top: auto; /* Garante que o botão fique no final */
+  margin-top: auto;
 }
 
 /* Estilos para o banner à direita */
 .banner {
-  position: absolute;
-  right: 0;
-  top: 100px;
-  width: 500px; /* Ajusta a largura do banner para caber em 2 colunas */
-  height: 700px; /* Aumenta a altura da div do banner */
+  position: fixed; /* Torna o banner fixo na tela */
+  top: 100px; /* Posiciona o banner abaixo do topo */
+  right: 0; /* Fixa o banner na lateral direita */
+  width: 400px; /* Reduz a largura do banner */
+  height: 750px; /* Ajusta a altura automaticamente */
   background-color: #f8f9fa;
   padding: 20px;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para dar destaque */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombras para destaque */
 }
 
-/* Estilo para o conteúdo do banner */
-.banner-content h2 {
-  margin-bottom: 10px;
-  font-size: 1.5rem;
-  color: #343a40;
-}
-
-.banner-content p {
-  font-size: 1rem;
-  color: #6c757d;
-}
-
-/* Estilo para a imagem do banner */
 .banner img {
-  margin-top: 15px;
   max-width: 100%;
-  height: auto; /* A altura da imagem vai se ajustar proporcionalmente */
+  height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
