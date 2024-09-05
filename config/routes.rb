@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Definir a rota raiz (página inicial) do aplicativo
-  root 'aulas#index'
+  root 'pages#home'
 
   # Rotas para Aulas
   resources :aulas

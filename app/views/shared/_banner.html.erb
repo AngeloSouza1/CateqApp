@@ -1,0 +1,23 @@
+<!-- app/views/shared/_banner.html.erb -->
+
+<!-- Coluna para o banner à direita -->
+    <div class="col-md-2">
+      <!-- Div para exibir a data e hora do encontro -->
+      <div class="date-time-container">
+        <h3>Encontro</h3>
+        
+        <p><%= Time.now.strftime("%d/%m/%Y - %H:%M") %></p> <!-- Exibe a data e a hora atuais -->
+      </div>
+
+      <!-- Banner abaixo da data e hora -->
+      <div class="banner">
+        <div class="banner-content">
+          <h2>Bem-vindo!</h2>
+          <p>
+          <p>Este espaço é utilizado para suas aulas e tarefas!</p>
+          <br>
+  
+          <%= image_tag "imag3.jpg", alt: "Imagem do Banner", class: "img-fluid" %>
+        </div>
+      </div>
+    </div>

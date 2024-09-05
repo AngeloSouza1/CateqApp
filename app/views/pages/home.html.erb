@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1><%= @message %></h1>
+      <p class="lead">Aqui estão algumas informações iniciais sobre sua aplicação.</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Seção de Aulas Recentes -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <h2>Aulas Recentes</h2>
+      <div class="row">
+        <% @aulas.each do |aula| %>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= aula.title %></h5>
+                <p class="card-text"><%= aula.content.truncate(100) %></p>
+                <%= link_to 'Ver Aula', aula_path(aula), class: 'btn btn-primary' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seção de Postagens Recentes -->
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <h2>Postagens Recentes</h2>
+      <div class="row">
+        <% @postagens.each do |postagem| %>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"><%= postagem.title %></h5>
+                <p class="card-text"><%= postagem.content.truncate(100) %></p>
+                <%# <%= link_to 'Ver Postagem', postagem_path(postagem), class: 'btn btn-primary' %> %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

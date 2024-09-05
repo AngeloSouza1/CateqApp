@@ -1,0 +1,19 @@
+<!-- app/views/shared/_sidebar.html.erb -->
+ <!-- Sidebar fixa à esquerda -->
+    <div class="col-md-2 sidebar">
+      <h3>Links</h3>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <%= link_to 'Home', root_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Aulas', aulas_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Postagens', postagens_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Mensagens', mensagens_path, class: 'nav-link' %>
+        </li>
+      </ul>
+    </div>

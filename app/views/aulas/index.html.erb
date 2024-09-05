@@ -1,24 +1,7 @@
 <div class="container-fluid mt-5">
   <div class="row">
     
-    <!-- Sidebar fixa à esquerda -->
-    <div class="col-md-2 sidebar">
-      <h3>Links</h3>
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <%= link_to 'Home', root_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Aulas', aulas_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Postagens', postagens_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Mensagens', mensagens_path, class: 'nav-link' %>
-        </li>
-      </ul>
-    </div>
+     <%= render 'shared/sidebar' %>
 
     <!-- Conteúdo principal (Aulas) -->
     <div class="col-md-8 offset-md-2">
@@ -42,27 +25,7 @@
       </div>
     </div>
 
-    <!-- Coluna para o banner à direita -->
-    <div class="col-md-2">
-      <!-- Div para exibir a data e hora do encontro -->
-      <div class="date-time-container">
-        <h3>Encontro</h3>
-        
-        <p><%= Time.now.strftime("%d/%m/%Y - %H:%M") %></p> <!-- Exibe a data e a hora atuais -->
-      </div>
-
-      <!-- Banner abaixo da data e hora -->
-      <div class="banner">
-        <div class="banner-content">
-          <h2>Bem-vindo!</h2>
-          <p>
-          <p>Este espaço é utilizado para suas aulas e tarefas!</p>
-          <br>
-  
-          <%= image_tag "imag3.jpg", alt: "Imagem do Banner", class: "img-fluid" %>
-        </div>
-      </div>
-    </div>
+     <%= render 'shared/banner' %>
 
   </div>
 </div>
