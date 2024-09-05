@@ -48,7 +48,7 @@
   position: absolute;
   right: 0;
   top: 100px;
-  width: 250px; /* Ajusta a largura do banner para caber em 2 colunas */
+  width: 500px; /* Ajusta a largura do banner para caber em 2 colunas */
   height: 700px; /* Aumenta a altura da div do banner */
   background-color: #f8f9fa;
   padding: 20px;
