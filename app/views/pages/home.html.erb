@@ -1,50 +1,48 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-12 text-center">
-      <h1><%= @message %></h1>
-      <p class="lead">Aqui estão algumas informações iniciais sobre sua aplicação.</p>
+    
+    <!-- Include do partial da sidebar à esquerda -->
+    <div class="col-md-2 d-none d-md-block">
+      <%= render 'shared/sidebar' %>
     </div>
-  </div>
 
-  <hr>
-
-  <!-- Seção de Aulas Recentes -->
-  <div class="row mt-4">
-    <div class="col-md-12">
-      <h2>Aulas Recentes</h2>
-      <div class="row">
-        <% @aulas.each do |aula| %>
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title"><%= aula.title %></h5>
-                <p class="card-text"><%= aula.content.truncate(100) %></p>
-                <%= link_to 'Ver Aula', aula_path(aula), class: 'btn btn-primary' %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+    <!-- Conteúdo principal ajustado -->
+    <div class="col-md-10 offset-md-2 col-sm-12">
+      
+      <!-- Texto com espaçamento aumentado e design elegante -->
+      <div class="text-center mb-5 p-5" style="background-color: #f8f9fa; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <h1 class="display-4" style="font-weight: bold; color: #34495e;"><%= @message %></h1>
+        <p class="lead">
+          O CateqApp é a sua plataforma digital de apoio à catequese. Aqui, você encontrará recursos essenciais para aprimorar o ensino religioso, organizar aulas, acompanhar postagens e se conectar com catequistas e catequizandos. Nossa missão é facilitar o aprendizado e promover a fé de maneira acessível e moderna. Explore nossas funcionalidades e prepare-se para uma jornada enriquecedora de formação espiritual.
+        </p>
       </div>
-    </div>
-  </div>
 
-  <!-- Seção de Postagens Recentes -->
-  <div class="row mt-4">
-    <div class="col-md-12">
-      <h2>Postagens Recentes</h2>
+      <hr class="my-5">
+
       <div class="row">
-        <% @postagens.each do |postagem| %>
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title"><%= postagem.title %></h5>
-                <p class="card-text"><%= postagem.content.truncate(100) %></p>
-                <%# <%= link_to 'Ver Postagem', postagem_path(postagem), class: 'btn btn-primary' %> %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+        
+  
+        <div class="col-md-6 text-center mb-4" style="background-color: #ffffff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+           <%= image_tag "imagem2.gif", alt: "Imagem Catequese 1", class: "img-fluid mb-4", style: "width: 100%; border-radius: 15px;" %>
+        </div>
+
+
+        <!-- Coluna para links estilizados -->
+        <div class="col-md-6 text-center" style="background-color: #ffffff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+          <ul class="list-unstyled">
+            <li class="mb-3">
+              <%= link_to 'Orações', aulas_path, class: 'text-decoration-none  h4', style: "transition: color 0.3s ease;" %>
+            </li>
+            <li class="mb-3">
+              <%= link_to 'Curiosidades', postagens_path, class: 'text-decoration-none  h4', style: "transition: color 0.3s ease;" %>
+            </li>
+            <li class="mb-3">
+              <%= link_to 'Datas em Destaque', mensagens_path, class: 'text-decoration-none  h4', style: "transition: color 0.3s ease;" %>
+            </li>
+          </ul>
+        </div>
       </div>
+      
     </div>
   </div>
 </div>
