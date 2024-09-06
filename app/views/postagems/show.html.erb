@@ -1,34 +1,51 @@
 <div class="container mt-5">
-  <h1><%= @postagem.title %></h1>
-  <p class="text-muted">Postado por <%= @postagem.user.email %> em <%= @postagem.created_at.strftime("%d/%m/%Y") %></p>
+  <!-- Título da Postagem -->
+  <h1 class="mb-3"><%= @postagem.title %></h1>
+  <p class="text-muted">
+    Postado por <strong><%= @postagem.user.email %></strong> em <%= @postagem.created_at.strftime("%d/%m/%Y") %>
+  </p>
   <hr>
+
+  <!-- Conteúdo da Postagem -->
   <div class="content mb-4">
     <p><%= simple_format(@postagem.content) %></p>
   </div>
 
-  <h3>Comentários</h3>
+  <!-- Seção de Comentários -->
+  <h3 class="mt-5">Comentários</h3>
   <hr>
+
   <div class="comments">
-    <% @postagem.comentarios.each do |comentario| %>
-      <div class="mb-3">
-        <strong><%= comentario.user.email %>:</strong>
-        <p><%= comentario.content %></p>
-      </div>
+    <% if @postagem.comentarios.any? %>
+      <% @postagem.comentarios.each do |comentario| %>
+        <div class="mb-4 p-3 border rounded bg-light">
+          <strong class="text-primary"><%= comentario.user.email %>:</strong>
+          <p class="mt-2"><%= comentario.content %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-muted">Ainda não há comentários nesta postagem.</p>
     <% end %>
   </div>
 
+  <!-- Formulário para Adicionar Comentário -->
   <% if user_signed_in? %>
-    <%= form_with(model: [ @postagem, Comentario.new ], local: true) do |form| %>
-      <div class="form-group">
-        <%= form.label :content, "Comentar" %>
-        <%= form.text_area :content, class: "form-control", rows: 3 %>
-      </div>
-
-      <%= form.submit "Comentar", class: "btn btn-primary mt-3" %>
-    <% end %>
-  <% else %>
-    <p>Faça <%= link_to "login", new_user_session_path %> para comentar nesta postagem.</p>
+    <div class="add-comment mt-5">
+      <h4>Adicionar Comentário</h4>
+      <%= form_with(model: [@postagem, Comentario.new], local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label :content, "Comentar" %>
+          <%= form.text_area :content, class: "form-control", rows: 3 %>
+        </div>
+        <div class="form-group">
+          <%= form.submit "Enviar", class: "btn btn-primary mt-2" %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 
-  <%= link_to 'Voltar para Postagens', postagens_path, class: 'btn btn-secondary mt-3' %>
+  <!-- Link para voltar para a lista de postagens -->
+  <div class="mt-4">
+    <%= link_to 'Voltar para Postagens', postagems_path, class: 'btn btn-secondary' %>
+  </div>
 </div>

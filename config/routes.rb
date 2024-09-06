@@ -8,10 +8,9 @@ Rails.application.routes.draw do
   # Rotas para Aulas
   resources :aulas
 
-  # Rotas para Mensagens (com associação ao usuário)
-  resources :mensagens
-
-  # Rotas para Postagens (com associação ao usuário)
-  resources :postagens
+  # Rotas para Postagens (com associação ao usuário) e aninhamento de Mensagens
+  resources :postagems do
+    resources :mensagens, only: [:create, :destroy]  # Mensagens aninhadas dentro de Postagens
+    resources :comentarios, only: [:create, :edit, :update, :destroy]
+  end
 end
-

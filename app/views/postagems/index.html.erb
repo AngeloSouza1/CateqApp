@@ -1,14 +1,65 @@
-<div class="container mt-5">
-  <h1 class="mb-4">Postagens</h1>
-
-  <% @postagens.each do |postagem| %>
-    <div class="card mb-4">
-      <div class="card-body">
-        <h5 class="card-title"><%= postagem.title %></h5>
-        <p class="card-text"><%= postagem.content.truncate(150) %></p>
-        <p class="text-muted">Postado por <%= postagem.user.email %> em <%= postagem.created_at.strftime("%d/%m/%Y") %></p>
-        <%= link_to 'Ver Postagem', postagem_path(postagem), class: 'btn btn-primary' %>
-      </div>
+<div class="container-fluid mt-5">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-2 d-none d-md-block">
+      <%= render 'shared/sidebar' %>
     </div>
-  <% end %>
+
+    <!-- Conteúdo principal -->
+    <div class="col-md-8 offset-md-0">
+      <header class="page-header">
+        <h1 class="page-title">Postagens</h1>
+      </header>
+
+      <div class="row card-container">     
+        <% @postagens.each do |postagem| %>
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title"><%= postagem.title %></h5>
+              <p class="card-text"><%= postagem.content.truncate(150) %></p>
+              <p class="text-muted">
+                Postado por <%= postagem.user.email %> em <%= postagem.created_at.strftime("%d/%m/%Y") %>
+              </p>
+              <%= link_to 'Ver Postagem', postagem_path(postagem), class: 'btn btn-primary' %>
+            </div>
+
+            <!-- Seção de Comentários -->
+            <div class="comments mt-3">
+                <% if postagem.comentarios.any? %>
+                  <% postagem.comentarios.each do |comentario| %>
+                    <div class="mb-4 p-3 border rounded bg-light">
+                      <strong class="text-primary"><%= comentario.user.email %>:</strong>
+                      <p class="mt-2"><%= comentario.content %></p>
+
+                      <!-- Links de edição e exclusão para o autor do comentário -->
+                      <% if comentario.user == current_user %>
+                        <%= link_to edit_postagem_comentario_path(postagem, comentario), class: 'text-warning me-2' do %>
+                          <i class="fas fa-edit"></i>
+                        <% end %>
+
+                      <%= button_to postagem_comentario_path(postagem, comentario), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-danger', form: { class: 'd-inline' } do %>
+                         <i class="fas fa-trash-alt"></i>
+                      <% end %>
+
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <p class="text-muted">Ainda não há comentários nesta postagem.</p>
+                <% end %>
+              </div>
+
+
+            <!-- Formulário para Adicionar Comentário -->
+      
+          </div>
+        <% end %>
+      </div>
+
+     
+    </div>
+
+    <!-- Banner Postagem -->
+    <%= render 'shared/banner_postagem' %>
+  </div>
 </div>

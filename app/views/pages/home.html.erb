@@ -21,24 +21,21 @@
 
       <div class="row">
         
-  
+        <!-- Coluna para as imagens, com bordas arredondadas e efeitos -->
         <div class="col-md-6 text-center mb-4" style="background-color: #ffffff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
-           <%= image_tag "imagem2.gif", alt: "Imagem Catequese 1", class: "img-fluid mb-4", style: "width: 100%; border-radius: 15px;" %>
+          <%= image_tag "imag1.jpg", alt: "Imagem Catequese 1", class: "img-fluid mb-4", style: "border-radius: 15px;" %>
         </div>
 
-
         <!-- Coluna para links estilizados -->
-        <div class="col-md-6 text-center" style="background-color: #ffffff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+        <div class="col-md-6  mb-4 text-center" style="background-color: #ffffff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
           <ul class="list-unstyled">
             <li class="mb-3">
               <%= link_to 'Orações', aulas_path, class: 'text-decoration-none  h4', style: "transition: color 0.3s ease;" %>
             </li>
             <li class="mb-3">
-              <%= link_to 'Curiosidades', postagens_path, class: 'text-decoration-none  h4', style: "transition: color 0.3s ease;" %>
+              <%= link_to 'Curiosidades', postagems_path, class: 'text-decoration-none  h4', style: "transition: color 0.3s ease;" %>
             </li>
-            <li class="mb-3">
-              <%= link_to 'Datas em Destaque', mensagens_path, class: 'text-decoration-none  h4', style: "transition: color 0.3s ease;" %>
-            </li>
+            
           </ul>
         </div>
       </div>

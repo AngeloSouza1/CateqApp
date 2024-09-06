@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_04_232741) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_05_215648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,12 +23,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_04_232741) do
     t.index ["user_id"], name: "index_aulas_on_user_id"
   end
 
+  create_table "comentarios", force: :cascade do |t|
+    t.text "content"
+    t.bigint "postagem_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["postagem_id"], name: "index_comentarios_on_postagem_id"
+    t.index ["user_id"], name: "index_comentarios_on_user_id"
+  end
+
   create_table "mensagems", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "receiver_id"
+    t.bigint "postagem_id", default: 1, null: false
+    t.index ["postagem_id"], name: "index_mensagems_on_postagem_id"
     t.index ["user_id"], name: "index_mensagems_on_user_id"
   end
 
@@ -55,6 +67,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_04_232741) do
   end
 
   add_foreign_key "aulas", "users"
+  add_foreign_key "comentarios", "postagems"
+  add_foreign_key "comentarios", "users"
+  add_foreign_key "mensagems", "postagems"
   add_foreign_key "mensagems", "users"
   add_foreign_key "postagems", "users"
 end

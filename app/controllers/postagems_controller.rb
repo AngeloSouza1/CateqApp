@@ -3,11 +3,12 @@ class PostagemsController < ApplicationController
 
   # GET /postagems or /postagems.json
   def index
-    @postagems = Postagem.all
+    @postagens = Postagem.includes(:comentarios).all
   end
 
   # GET /postagems/1 or /postagems/1.json
   def show
+    @postagem = Postagem.find(params[:id])
   end
 
   # GET /postagems/new

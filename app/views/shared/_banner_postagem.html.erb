@@ -1,0 +1,22 @@
+<!-- app/views/shared/_banner.html.erb -->
+
+
+    <div class="col-md-2">
+
+      <div class="date-time-container">
+        <h3>Encontro</h3>
+        
+        <p><%= Time.now.strftime("%d/%m/%Y - %H:%M") %></p> 
+      </div>
+
+      <div class="banner">
+        <div class="banner-content">
+          <h2>Bem-vindo!</h2>
+          <p>
+          <p>Este espaço é utilizado para suas aulas e tarefas!</p>
+          <br>
+  
+          <%= image_tag "imag3.jpg", alt: "Imagem do Banner", class: "img-fluid" %>
+        </div>
+      </div>
+    </div>

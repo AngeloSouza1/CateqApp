@@ -8,7 +8,8 @@ class User < ApplicationRecord
    enum role: { catequista: 'catequista', catequisando: 'catequisando' }
 
   has_many :mensagens
-  has_many :postagens
+  has_many :postagems
   has_many :aulas
+  has_many :comentarios
 
 end
