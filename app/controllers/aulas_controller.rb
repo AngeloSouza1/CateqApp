@@ -1,5 +1,6 @@
 class AulasController < ApplicationController
   before_action :set_aula, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /aulas or /aulas.json
   def index
@@ -38,7 +39,7 @@ class AulasController < ApplicationController
   def update
     respond_to do |format|
       if @aula.update(aula_params)
-        format.html { redirect_to aula_url(@aula), notice: "Aula was successfully updated." }
+        format.html { redirect_to aula_url(@aula), notice: "Aula atualizada com sucesso." }
         format.json { render :show, status: :ok, location: @aula }
       else
         format.html { render :edit, status: :unprocessable_entity }
