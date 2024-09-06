@@ -11,20 +11,27 @@
         <h1 class="page-title">Postagens</h1>
       </header>
 
-      <div class="row card-container">     
-        <% @postagens.each do |postagem| %>
-          <div class="card mb-4">
-            <div class="card-body">
-              <h5 class="card-title"><%= postagem.title %></h5>
-              <p class="card-text"><%= postagem.content.truncate(150) %></p>
-              <p class="text-muted">
-                Postado por <%= postagem.user.email %> em <%= postagem.created_at.strftime("%d/%m/%Y") %>
-              </p>
-              <%= link_to 'Ver Postagem', postagem_path(postagem), class: 'btn btn-primary' %>
-            </div>
+      <div class="mb-3 ">
+        <%= link_to new_postagem_path, class: 'btn btn-success' do %>
+          <i class="fas fa-plus"></i> Nova Postagem
+        <% end %>
+      </div>
 
-            <!-- Seção de Comentários -->
-            <div class="comments mt-3">
+      <div class="row card-container">
+        <% @postagens.each do |postagem| %>
+          <div class="col-md-12 mb-4"> <!-- Agora cada card ocupa a largura total -->
+            <div class="card h-100" style="max-height: 400px; overflow-y: auto;">
+              <div class="card-body">
+                <h5 class="card-title"><%= postagem.title %></h5>
+                <p class="card-text"><%= postagem.content.truncate(150) %></p>
+                <p class="text-muted">
+                  Postado por <%= postagem.user.email %> em <%= postagem.created_at.strftime("%d/%m/%Y") %>
+                </p>
+                <%= link_to 'Ver Postagem', postagem_path(postagem), class: 'btn btn-primary' %>
+              </div>
+
+              <!-- Seção de Comentários -->
+              <div class="comments mt-3">
                 <% if postagem.comentarios.any? %>
                   <% postagem.comentarios.each do |comentario| %>
                     <div class="mb-4 p-3 border rounded bg-light">
@@ -37,10 +44,9 @@
                           <i class="fas fa-edit"></i>
                         <% end %>
 
-                      <%= button_to postagem_comentario_path(postagem, comentario), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-danger', form: { class: 'd-inline' } do %>
-                         <i class="fas fa-trash-alt"></i>
-                      <% end %>
-
+                        <%= button_to postagem_comentario_path(postagem, comentario), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-danger', form: { class: 'd-inline' } do %>
+                          <i class="fas fa-trash-alt"></i>
+                        <% end %>
                       <% end %>
                     </div>
                   <% end %>
@@ -48,15 +54,10 @@
                   <p class="text-muted">Ainda não há comentários nesta postagem.</p>
                 <% end %>
               </div>
-
-
-            <!-- Formulário para Adicionar Comentário -->
-      
+            </div>
           </div>
         <% end %>
       </div>
-
-     
     </div>
 
     <!-- Banner Postagem -->

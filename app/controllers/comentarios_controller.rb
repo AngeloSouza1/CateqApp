@@ -29,8 +29,11 @@ class ComentariosController < ApplicationController
   end
 
   def destroy
-    @comentario.destroy
-    # redirect_to @postagem, notice: 'Comentário removido com sucesso.'
+    if @comentario.destroy
+      redirect_to postagems_path, notice: 'Comentário removido com sucesso.'
+    else
+      redirect_to postagems_path, alert: 'Erro ao remover o comentário.'
+    end
   end
 
   private

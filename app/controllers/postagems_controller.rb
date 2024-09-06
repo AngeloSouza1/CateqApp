@@ -26,7 +26,7 @@ class PostagemsController < ApplicationController
 
     respond_to do |format|
       if @postagem.save
-        format.html { redirect_to postagem_url(@postagem), notice: "Postagem was successfully created." }
+        format.html { redirect_to postagems_url, notice: "Postagem was successfully created." }
         format.json { render :show, status: :created, location: @postagem }
       else
         format.html { render :new, status: :unprocessable_entity }
