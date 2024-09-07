@@ -157,3 +157,19 @@
 .page-header:hover {
   background-color: #34495e; /* Alteração suave no hover */
 }
+
+
+/* Estilo de inputs sublinhados */
+.form-control-underline {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+}
+
+.form-control-underline:focus {
+  border-bottom-color: #007bff; /* Cor da borda inferior no foco */
+  box-shadow: none;
+  outline: none;
+}

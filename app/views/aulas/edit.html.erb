@@ -1,12 +1,19 @@
-<% content_for :title, "Editing aula" %>
+<!-- Sidebar -->
+<div class="col-md-2 d-none d-md-block">
+  <%= render 'shared/sidebar' %>
+</div>
+<div class="container mt-5">
+    <% content_for :title, "Editing aula" %>
 
-<h1>Editing aula</h1>
+    <h1>Editando a aula</h1>
+    <hr>
+    <%= render "form", aula: @aula %>
 
-<%= render "form", aula: @aula %>
+    <br>
 
-<br>
-
-<div>
-  <%= link_to "Show this aula", @aula %> |
-  <%= link_to "Back to aulas", aulas_path %>
+    <div>
+    
+      <%= link_to "Show this aula", @aula %> |
+      <%= link_to "Back to aulas", aulas_path %>
+    </div>
 </div>

@@ -1,29 +1,38 @@
-<%= form_with(model: aula) do |form| %>
-  <% if aula.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(aula.errors.count, "error") %> prohibited this aula from being saved:</h2>
+<div class="container mt-5">
+  <%= form_with(model: aula, local: true) do |form| %>
+    <!-- Exibição de erros -->
+    <% if aula.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(aula.errors.count, "erro") %> impediu que a aula fosse salva:</h4>
+        <ul>
+          <% aula.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% aula.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <!-- Campo para o título da aula -->
+    <div class="mb-3">
+      <%= form.label :title, "Título da Aula", class: "form-label fw-bold" %>
+      <%= form.text_field :title, class: "form-control form-control-underline", placeholder: "Digite o título da aula" %>
+    </div>
+
+    <!-- Campo para a descrição da aula -->
+    <div class="mb-3">
+      <%= form.label :content, "Descrição da Aula", class: "form-label fw-bold" %>
+      <%= form.text_area :content, class: "form-control form-control-underline", rows: 4, placeholder: "Descreva brevemente a aula" %>
+    </div>
+
+    <!-- Campo para o conteúdo detalhado da aula -->
+    <div class="mb-3">
+      <%= form.label :detailed_content, "Conteúdo Detalhado", class: "form-label fw-bold" %>
+      <%= form.text_area :detailed_content, class: "form-control form-control-underline", rows: 6, placeholder: "Descreva o conteúdo detalhado da aula" %>
+    </div>
+
+    <!-- Botão de submissão -->
+    <div>
+      <%= form.submit "Salvar Aula", class: "btn btn-primary btn shadow-sm" %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
-
-
+</div>

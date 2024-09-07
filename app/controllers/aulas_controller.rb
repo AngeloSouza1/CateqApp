@@ -23,6 +23,7 @@ class AulasController < ApplicationController
   # POST /aulas or /aulas.json
   def create
     @aula = Aula.new(aula_params)
+    @aula.user = current_user
 
     respond_to do |format|
       if @aula.save

@@ -1,15 +1,28 @@
-  <!-- Sidebar -->
-    <div class="col-md-2 d-none d-md-block">
-      <%= render 'shared/sidebar' %>
-    </div>
-
+<!-- Sidebar -->
+<div class="col-md-2 d-none d-md-block">
+  <%= render 'shared/sidebar' %>
+</div>
 
 <div class="container mt-5">
+  <!-- Título da Aula -->
   <h1><%= @aula.title %></h1>
   <hr>
+
+  <!-- Descrição da Aula -->
   <div class="content">
+    <h5>Descrição</h5>
     <p><%= simple_format(@aula.content) %></p>
   </div>
 
-  <%= link_to 'Voltar para Aulas', aulas_path, class: 'btn btn-secondary mt-3' %>
+  <!-- Conteúdo Detalhado da Aula -->
+  <div class="content mt-4">
+    <h5>Conteúdo Detalhado</h5>
+    <p><%= simple_format(@aula.detailed_content) %></p>
+  </div>
+
+  <!-- Botões de ação -->
+  <div class="d-flex justify-content-start mt-4">
+    <%= link_to 'Editar Aula', edit_aula_path(@aula), class: 'btn btn-warning me-2' %>
+    <%= link_to 'Voltar para Aulas', aulas_path, class: 'btn btn-secondary' %>
+  </div>
 </div>
