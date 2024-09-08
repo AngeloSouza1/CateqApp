@@ -24,11 +24,12 @@
       <%= form.text_area :content, class: "form-control form-control-underline", rows: 4, placeholder: "Descreva brevemente a aula" %>
     </div>
 
-    <!-- Campo para o conteúdo detalhado da aula -->
+     <!-- Campo para o conteúdo detalhado da aula com Trix Editor -->
     <div class="mb-3">
-      <%= form.label :detailed_content, "Conteúdo Detalhado", class: "form-label fw-bold" %>
-      <%= form.text_area :detailed_content, class: "form-control form-control-underline", rows: 6, placeholder: "Descreva o conteúdo detalhado da aula" %>
+        <%= form.label :detailed_content, "Conteúdo Detalhado", class: "form-label fw-bold" %>
+        <%= form.rich_text_area :detailed_content, class: "form-control form-control-underline", placeholder: "Descreva o conteúdo detalhado da aula" %>
     </div>
+
 
     <!-- Botão de submissão -->
     <div>
@@ -36,3 +37,6 @@
     </div>
   <% end %>
 </div>
+
+
+

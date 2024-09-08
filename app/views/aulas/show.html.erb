@@ -16,9 +16,10 @@
 
   <!-- Conteúdo Detalhado da Aula -->
   <div class="content mt-4">
-    <h5>Conteúdo Detalhado</h5>
-    <p><%= simple_format(@aula.detailed_content) %></p>
-  </div>
+  <h5>Conteúdo Detalhado</h5>
+  <%= @aula.detailed_content.body %>
+</div>
+
 
   <!-- Botões de ação -->
   <div class="d-flex justify-content-start mt-4">
