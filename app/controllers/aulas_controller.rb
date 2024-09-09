@@ -4,7 +4,7 @@ class AulasController < ApplicationController
 
   # GET /aulas or /aulas.json
   def index
-    @aulas = Aula.all
+    @aulas = Aula.order(:created_at)
   end
 
   # GET /aulas/1 or /aulas/1.json
@@ -67,6 +67,6 @@ class AulasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def aula_params
-      params.require(:aula).permit(:title, :content)
+      params.require(:aula).permit(:title, :content, :detailed_content)
     end
 end

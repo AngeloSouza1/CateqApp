@@ -4,8 +4,5 @@ import "controllers"
 import "bootstrap"
 import "@popperjs/core"
 import "trix"
-import "trix/dist/trix.css"
-
-
-import "trix"
 import "@rails/actiontext"
+
