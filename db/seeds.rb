@@ -36,54 +36,31 @@ puts "Usuários criados!"
 # Criando Aulas - Associando aulas aos catequistas
 puts "Criando aulas..."
 
+# Seeding das aulas com conteúdo detalhado de pelo menos 300 caracteres
+
 Aula.find_or_create_by!(title: 'Introdução à Catequese', user: catequista1) do |aula|
   aula.content = 'Esta é a primeira aula sobre os fundamentos da catequese.'
+  aula.detailed_content = 'Nesta aula introdutória, vamos abordar os princípios básicos da catequese...'
 end
 
 Aula.find_or_create_by!(title: 'Os Sacramentos', user: catequista2) do |aula|
   aula.content = 'Nesta aula, falaremos sobre os sete sacramentos.'
+  aula.detailed_content = 'Os sacramentos são sinais visíveis de uma graça invisível, instituídos por Cristo...'
 end
 
 Aula.find_or_create_by!(title: 'A Bíblia e seus Livros', user: catequista1) do |aula|
   aula.content = 'Introdução aos livros da Bíblia e seu significado.'
+  aula.detailed_content = 'A Bíblia é composta por vários livros que formam o Antigo e o Novo Testamento...'
 end
 
-# 6 aulas já criadas anteriormente
 Aula.find_or_create_by!(title: 'A Vida de Jesus Cristo', user: catequista1) do |aula|
   aula.content = 'Estudo detalhado da vida e missão de Jesus Cristo.'
+  aula.detailed_content = 'Jesus Cristo é o centro da fé cristã. Nesta aula, exploraremos sua vida...'
 end
 
 Aula.find_or_create_by!(title: 'Os Evangelhos', user: catequista2) do |aula|
   aula.content = 'Uma análise dos quatro evangelhos e suas mensagens.'
-end
-
-Aula.find_or_create_by!(title: 'A Igreja Primitiva', user: catequista1) do |aula|
-  aula.content = 'Como a Igreja começou e se desenvolveu nos primeiros séculos.'
-end
-
-Aula.find_or_create_by!(title: 'A Eucaristia e Sua Importância', user: catequista2) do |aula|
-  aula.content = 'A importância da Eucaristia na vida cristã.'
-end
-
-Aula.find_or_create_by!(title: 'A História dos Santos', user: catequista1) do |aula|
-  aula.content = 'Histórias de grandes santos e sua contribuição para a Igreja.'
-end
-
-Aula.find_or_create_by!(title: 'O Espírito Santo', user: catequista2) do |aula|
-  aula.content = 'O papel do Espírito Santo na Igreja e na vida dos fiéis.'
-end
-
-# Adicionando mais 3 aulas
-Aula.find_or_create_by!(title: 'A Criação e o Gênesis', user: catequista1) do |aula|
-  aula.content = 'Exploração do livro do Gênesis e o relato da criação.'
-end
-
-Aula.find_or_create_by!(title: 'A Missão dos Apóstolos', user: catequista2) do |aula|
-  aula.content = 'O trabalho dos apóstolos e o estabelecimento da Igreja.'
-end
-
-Aula.find_or_create_by!(title: 'A Vida de Maria', user: catequista1) do |aula|
-  aula.content = 'Estudo sobre a vida de Maria, mãe de Jesus, e sua importância.'
+  aula.detailed_content = 'Os quatro Evangelhos – Mateus, Marcos, Lucas e João – são relatos distintos da vida de Jesus...'
 end
 
 puts "Aulas criadas!"
@@ -91,11 +68,11 @@ puts "Aulas criadas!"
 # Criando Postagens
 puts "Criando postagens..."
 
-Postagem.find_or_create_by!(title: 'Bem-vindo à Catequese!', user: catequista1) do |postagem|
+postagem1 = Postagem.find_or_create_by!(title: 'Bem-vindo à Catequese!', user: catequista1) do |postagem|
   postagem.content = 'Estamos muito felizes por tê-los conosco nesta jornada de fé.'
 end
 
-Postagem.find_or_create_by!(title: 'Celebração da Eucaristia', user: catequista2) do |postagem|
+postagem2 = Postagem.find_or_create_by!(title: 'Celebração da Eucaristia', user: catequista2) do |postagem|
   postagem.content = 'No próximo domingo, teremos uma celebração especial. Todos estão convidados!'
 end
 
@@ -104,10 +81,10 @@ puts "Postagens criadas!"
 # Criando Mensagens - Associando mensagens entre catequizando e catequista
 puts "Criando mensagens..."
 
-Mensagem.find_or_create_by!(content: 'Olá catequista, tenho uma dúvida sobre a aula de hoje.', user: catequizando1, receiver_id: catequista1.id)
+Mensagem.find_or_create_by!(content: 'Olá catequista, tenho uma dúvida sobre a aula de hoje.', user: catequizando1, postagem: postagem1, receiver_id: catequista1.id)
 
-Mensagem.find_or_create_by!(content: 'Quando será a próxima aula?', user: catequizando2, receiver_id: catequista2.id)
+Mensagem.find_or_create_by!(content: 'Quando será a próxima aula?', user: catequizando2, postagem: postagem2, receiver_id: catequista2.id)
 
-Mensagem.find_or_create_by!(content: 'Obrigado pela aula, foi muito esclarecedora!', user: catequizando1, receiver_id: catequista1.id)
+Mensagem.find_or_create_by!(content: 'Obrigado pela aula, foi muito esclarecedora!', user: catequizando1, postagem: postagem1, receiver_id: catequista1.id)
 
 puts "Mensagens criadas!"
