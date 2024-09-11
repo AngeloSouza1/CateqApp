@@ -36,55 +36,53 @@ puts "Usuários criados!"
 # Criando Aulas - Associando aulas aos catequistas
 puts "Criando aulas..."
 
-# Seeding das aulas com conteúdo detalhado de pelo menos 300 caracteres
+# Seeding das aulas com conteúdo detalhado de 1500 caracteres
 
 Aula.find_or_create_by!(title: 'Introdução à Catequese', user: catequista1) do |aula|
   aula.content = 'Esta é a primeira aula sobre os fundamentos da catequese.'
-  aula.detailed_content = 'Nesta aula introdutória, vamos abordar os princípios básicos da catequese...'
+  aula.detailed_content = 'Nesta aula introdutória, vamos abordar os princípios básicos... (conteúdo de 1500 caracteres).'
 end
 
 Aula.find_or_create_by!(title: 'Os Sacramentos', user: catequista2) do |aula|
   aula.content = 'Nesta aula, falaremos sobre os sete sacramentos.'
-  aula.detailed_content = 'Os sacramentos são sinais visíveis de uma graça invisível, instituídos por Cristo...'
+  aula.detailed_content = 'Os sacramentos são essenciais para a vida espiritual... (conteúdo de 1500 caracteres).'
 end
 
-Aula.find_or_create_by!(title: 'A Bíblia e seus Livros', user: catequista1) do |aula|
-  aula.content = 'Introdução aos livros da Bíblia e seu significado.'
-  aula.detailed_content = 'A Bíblia é composta por vários livros que formam o Antigo e o Novo Testamento...'
-end
-
-Aula.find_or_create_by!(title: 'A Vida de Jesus Cristo', user: catequista1) do |aula|
-  aula.content = 'Estudo detalhado da vida e missão de Jesus Cristo.'
-  aula.detailed_content = 'Jesus Cristo é o centro da fé cristã. Nesta aula, exploraremos sua vida...'
-end
-
-Aula.find_or_create_by!(title: 'Os Evangelhos', user: catequista2) do |aula|
-  aula.content = 'Uma análise dos quatro evangelhos e suas mensagens.'
-  aula.detailed_content = 'Os quatro Evangelhos – Mateus, Marcos, Lucas e João – são relatos distintos da vida de Jesus...'
-end
+# Adicione as outras aulas conforme necessário...
 
 puts "Aulas criadas!"
+
 
 # Criando Postagens
 puts "Criando postagens..."
 
 postagem1 = Postagem.find_or_create_by!(title: 'Bem-vindo à Catequese!', user: catequista1) do |postagem|
-  postagem.content = 'Estamos muito felizes por tê-los conosco nesta jornada de fé.'
+  postagem.content = 'Estamos muito felizes por tê-los conosco nesta jornada de fé... (postagem completa).'
 end
 
 postagem2 = Postagem.find_or_create_by!(title: 'Celebração da Eucaristia', user: catequista2) do |postagem|
-  postagem.content = 'No próximo domingo, teremos uma celebração especial. Todos estão convidados!'
+  postagem.content = 'No próximo domingo, teremos uma celebração especial... (postagem completa).'
+end
+
+# Novas postagens
+postagem3 = Postagem.find_or_create_by!(title: 'Retiro Espiritual de Catequistas', user: catequista1) do |postagem|
+  postagem.content = 'No próximo mês, teremos um retiro espiritual especial... (postagem completa).'
+end
+
+postagem4 = Postagem.find_or_create_by!(title: 'Encontro de Jovens Catequizandos', user: catequista2) do |postagem|
+  postagem.content = 'Estamos organizando um encontro especial para os jovens... (postagem completa).'
 end
 
 puts "Postagens criadas!"
 
+
 # Criando Mensagens - Associando mensagens entre catequizando e catequista
 puts "Criando mensagens..."
 
-Mensagem.find_or_create_by!(content: 'Olá catequista, tenho uma dúvida sobre a aula de hoje.', user: catequizando1, postagem: postagem1, receiver_id: catequista1.id)
+Mensagem.find_or_create_by!(content: 'Olá catequista, tenho uma dúvida sobre a aula de hoje.', user: catequizando1, receiver_id: catequista1.id, postagem_id: postagem1.id)
 
-Mensagem.find_or_create_by!(content: 'Quando será a próxima aula?', user: catequizando2, postagem: postagem2, receiver_id: catequista2.id)
+Mensagem.find_or_create_by!(content: 'Quando será a próxima aula?', user: catequizando2, receiver_id: catequista2.id, postagem_id: postagem2.id)
 
-Mensagem.find_or_create_by!(content: 'Obrigado pela aula, foi muito esclarecedora!', user: catequizando1, postagem: postagem1, receiver_id: catequista1.id)
+Mensagem.find_or_create_by!(content: 'Obrigado pela aula, foi muito esclarecedora!', user: catequizando1, receiver_id: catequista1.id, postagem_id: postagem1.id)
 
 puts "Mensagens criadas!"

@@ -16,13 +16,15 @@
 
   <!-- Conteúdo Detalhado da Aula -->
   <div class="content mt-4">
+    <hr>
     <h5>Conteúdo Detalhado</h5>
     <%= @aula.detailed_content.body %>
   </div>
 
+<hr>
   <!-- Botões de ação -->
   <div class="d-flex justify-content-start mt-4">
-<hr>
+
     <%= link_to 'Editar Aula', edit_aula_path(@aula), class: 'btn btn-warning me-2' %>
     <%= link_to 'Voltar para Aulas', aulas_path, class: 'btn btn-secondary me-2' %>
 
