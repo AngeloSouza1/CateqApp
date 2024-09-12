@@ -3,12 +3,20 @@
   <%= render 'shared/sidebar' %>
 </div>
 
+
+
+
 <div class="container mt-5">
   <!-- Título da Aula -->
   <h1><%= @aula.title %></h1>
   <hr>
-
-  <!-- Descrição da Aula -->
+  <% if @aula.image.attached? %>
+    <%= image_tag @aula.image.variant(resize_to_limit: [300, 200]) %>
+  <% else %>
+    <%= image_tag "default_image.png", size: "300x200" %>
+  <% end %>
+  <hr>
+   <!-- Descrição da Aula -->
   <div class="content">
     <h5>Descrição</h5>
     <p><%= simple_format(@aula.content) %></p>
@@ -20,6 +28,8 @@
     <h5>Conteúdo Detalhado</h5>
     <%= @aula.detailed_content.body %>
   </div>
+
+
 
 <hr>
   <!-- Botões de ação -->

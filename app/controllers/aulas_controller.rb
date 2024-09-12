@@ -67,6 +67,6 @@ class AulasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def aula_params
-      params.require(:aula).permit(:title, :content, :detailed_content)
+      params.require(:aula).permit(:title, :content, :detailed_content, :image)
     end
 end

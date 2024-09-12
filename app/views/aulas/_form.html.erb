@@ -31,6 +31,12 @@
         <%= form.rich_text_area :detailed_content, class: "form-control form-control-underline", placeholder: "Descreva o conteúdo detalhado da aula" %>
     </div>
 
+  <div class="mb-3">
+    <%= form.label :image, "Imagem da Aula", class: "form-label" %>
+    <%= form.file_field :image, class: "form-control" %>
+  </div>
+
+
 
     <!-- Botão de submissão -->
     <div>

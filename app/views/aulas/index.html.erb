@@ -1,30 +1,41 @@
-
 <div class="container-fluid mt-5">
   <div class="row">
     <%= render 'shared/sidebar' %>
+    
     <!-- Conteúdo principal (Aulas) -->
     <div class="col-md-8 offset-md-2">
       <header class="page-header">
         <h1 class="page-title">Aulas</h1>
       </header>
 
-      <!-- Botão Adicionar Aula à centro -->
+      <!-- Botão Adicionar Aula ao centro -->
       <div class="mb-3 text-center">
         <%= link_to new_aula_path, class: 'btn btn-success' do %>
           <i class="fas fa-plus"></i> Adicionar Aula
         <% end %>
       </div>
-   
-      <!-- Cards das Aulas com tamanho padrão -->
-       <div class="row card-container">
+
+      <!-- Cards das Aulas com imagem -->
+      <div class="row card-container">
         <% @aulas.each do |aula| %>
-          <div class="col-md-4"> <!-- Garante 3 cards por linha -->
-            <div class="card card-custom">
+          <div class="col-md-4 mb-4"> <!-- Garante 3 cards por linha -->
+            <div class="card card-custom h-100">
+              
+              <!-- Exibir imagem (usando ActiveStorage) -->
+              <% if aula.image.attached? %>
+                <%= image_tag aula.image.variant(resize_to_fit: [300, 200]).processed, class: "card-img-top", alt: aula.title %>
+              <% else %>
+                <%= image_tag "default_image.png", class: "card-img-top", alt: "Imagem Padrão" %>
+              <% end %>
+
               <div class="card-body card-body-custom">
                 <h5 class="card-title"><%= aula.title %></h5>
                 <p class="card-text"><%= aula.content.truncate(100) %></p>
               </div>
-              <%= link_to 'Ver Aula', aula_path(aula), class: 'btn btn-primary mt-auto' %>
+              
+              <div class="card-footer text-center">
+                <%= link_to 'Ver Aula', aula_path(aula), class: 'btn btn-primary' %>
+              </div>
             </div>
           </div>
         <% end %>
