@@ -29,12 +29,14 @@
               <% end %>
 
               <div class="card-body card-body-custom">
+               <hr>
+               <p>
                 <h5 class="card-title"><%= aula.title %></h5>
-                <p class="card-text"><%= aula.content.truncate(100) %></p>
+                   <!--<p class="card-text"><%= aula.content.truncate(100) %></p> -->
               </div>
               
               <div class="card-footer text-center">
-                <%= link_to 'Ver Aula', aula_path(aula), class: 'btn btn-primary' %>
+                <%= link_to 'Ver Aula', aula_path(aula), class: 'btn btn-primary w-100' %>
               </div>
             </div>
           </div>
