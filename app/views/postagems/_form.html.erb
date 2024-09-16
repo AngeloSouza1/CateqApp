@@ -1,32 +1,42 @@
-<%= form_with(model: postagem) do |form| %>
-  <% if postagem.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(postagem.errors.count, "error") %> prohibited this postagem from being saved:</h2>
+<div class="container mt-5">
+  <%= form_with(model: postagem, local: true) do |form| %>
 
-      <ul>
-        <% postagem.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+    <!-- Exibição de erros -->
+    <% if postagem.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(postagem.errors.count, "erro") %> impediu que a postagem fosse salva:</h4>
+        <ul>
+          <% postagem.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Campo para o título da postagem -->
+    <div class="mb-3">
+      <%= form.label :title, "Título da Postagem", class: "form-label fw-bold" %>
+      <%= form.text_field :title, class: "form-control form-control-underline", placeholder: "Digite o título da postagem" %>
     </div>
+
+    <!-- Campo para o conteúdo da postagem -->
+    <div class="mb-3">
+      <%= form.label :content, "Conteúdo da Postagem", class: "form-label fw-bold" %>
+      <%= form.rich_text_area :content, class: "form-control form-control-underline", placeholder: "Escreva o conteúdo da postagem" %>
+    </div>
+    
+  
+  <div class="mb-3">
+     <!-- Campo oculto para o ID do usuário (caso o usuário seja definido automaticamente) -->
+    <%= form.hidden_field :user_id, value: current_user.id %>
+</div>
+
+
+
+    <!-- Botão de submissão -->
+    <div>
+      <%= form.submit "Salvar Postagem", class: "btn btn-primary btn shadow-sm" %>
+    </div>
+
   <% end %>
-
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

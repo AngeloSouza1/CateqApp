@@ -9,7 +9,7 @@ class ComentariosController < ApplicationController
     @comentario.user = current_user
 
     if @comentario.save
-      redirect_to @postagem, notice: 'Comentário adicionado com sucesso.'
+      redirect_to postagems_path, notice: 'Comentário adicionado com sucesso.'
     else
       redirect_to @postagem, alert: 'Erro ao adicionar comentário.'
     end
@@ -21,7 +21,7 @@ class ComentariosController < ApplicationController
 
   def update
     if @comentario.update(comentario_params)
-      redirect_to @postagem, notice: 'Comentário atualizado com sucesso.'
+      redirect_to postagems_path, notice: 'Comentário atualizado com sucesso.'
     else
       @comentarios = @postagem.comentarios
       render :edit, alert: 'Erro ao atualizar o comentário.'

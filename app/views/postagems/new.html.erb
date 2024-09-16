@@ -1,11 +1,18 @@
-<% content_for :title, "New postagem" %>
-
-<h1>New postagem</h1>
-
-<%= render "form", postagem: @postagem %>
-
-<br>
-
-<div>
-  <%= link_to "Back to postagems", postagems_path %>
+<!-- Sidebar -->
+<div class="col-md-2 d-none d-md-block">
+  <%= render 'shared/sidebar' %>
 </div>
+
+<div class="container mt-5">
+<% content_for :title, "New postagem" %>
+<h1>Nova Postagem</h1>
+<hr>
+<%= render "form", postagem: @postagem %>
+<br>
+<div>
+        <%= link_to "Voltar para Postagens", postagems_path, style: "color: #343a40;" %>
+</div>
+</div>
+
+
+

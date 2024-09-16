@@ -1,14 +1,23 @@
 <div class="container mt-5">
-  <h2>Editar Comentário</h2>
+ <!-- Sidebar -->
+<div class="col-md-2 d-none d-md-block">
+  <%= render 'shared/sidebar' %>
+</div>
+ 
+  <h1>Editar Comentário</h1>
+  <hr>
   <%= form_with(model: [@postagem, @comentario], local: true) do |form| %>
     <div class="form-group">
       <%= form.label :content, "Conteúdo do Comentário" %>
+   
       <%= form.text_area :content, class: "form-control", rows: 3 %>
     </div>
+   <br>
     <div class="form-group mt-2">
       <%= form.submit "Atualizar", class: "btn btn-primary" %>
+       <%= link_to 'Cancelar', postagems_path, class: 'btn btn-secondary' %>
     </div>
   <% end %>
 
-  <%= link_to 'Cancelar', @postagem, class: 'btn btn-secondary mt-2' %>
+ 
 </div>
