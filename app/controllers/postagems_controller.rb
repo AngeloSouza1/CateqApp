@@ -3,7 +3,10 @@ class PostagemsController < ApplicationController
 
   # GET /postagems or /postagems.json
   def index
-    @postagens = Postagem.includes(:comentarios).all
+    # @postagens = Postagem.includes(:comentarios).all
+    @postagens = Postagem.order(:created_at) 
+
+    
   end
 
   # GET /postagems/1 or /postagems/1.json

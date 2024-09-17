@@ -1,11 +1,11 @@
 <div class="container mt-5">
-  <%= form_with(model: aula, local: true) do |form| %>
+  <%= form_with(model: @aula, local: true, id: "edit-aula-form", data: { new_record: @aula.new_record? }) do |form| %>
     <!-- Exibição de erros -->
-    <% if aula.errors.any? %>
+    <% if @aula.errors.any? %>
       <div class="alert alert-danger">
-        <h4><%= pluralize(aula.errors.count, "erro") %> impediu que a aula fosse salva:</h4>
+        <h4><%= pluralize(@aula.errors.count, "erro") %> impediu que a aula fosse salva:</h4>
         <ul>
-          <% aula.errors.full_messages.each do |message| %>
+          <% @aula.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
         </ul>
@@ -24,31 +24,56 @@
       <%= form.text_area :content, class: "form-control form-control-underline", placeholder: "Descreva brevemente a aula" %>
     </div>
   
-     <!-- Campo para o conteúdo detalhado da aula com Trix Editor -->
+    <!-- Campo para o conteúdo detalhado da aula com Trix Editor -->
     <div class="mb-3">
-         <%= form.label :detailed_content, "Conteúdo Detalhado", class: "form-label fw-bold" %>
-        <%= form.rich_text_area :detailed_content, class: "form-control form-control-underline", rows: 4, placeholder: "Descreva o conteúdo detalhado da aula", style: "height: 150px; overflow-y: auto; resize: both;" %>
+      <%= form.label :detailed_content, "Conteúdo Detalhado", class: "form-label fw-bold" %>
+      <%= form.rich_text_area :detailed_content, class: "form-control form-control-underline", placeholder: "Descreva o conteúdo detalhado da aula", style: "height: 150px; overflow-y: auto; resize: both;" %>
     </div>
 
-      <% if @aula.image.attached? %>
-        <%= image_tag @aula.image.variant(resize_to_limit: [250, 100]) %>
-      <% else %>
-        <%= image_tag "default_image.png", size: "250x100" %>
-      <% end %>
-      
+    <!-- Exibir imagem (se houver) -->
+    <% if @aula.image.attached? %>
+      <%= image_tag @aula.image.variant(resize_to_limit: [250, 100]), alt: "Imagem da Aula" %>
+    <% else %>
+      <%= image_tag "default_image.png", size: "250x100", alt: "Imagem Padrão" %>
+    <% end %>
       
     <div class="mb-3">
       <%= form.label :image, "Imagem da Aula", class: "form-label" %>
       <%= form.file_field :image, class: "form-control" %>
     </div>
 
-
-    <!-- Botão de submissão -->
+    <!-- Botão de submissão (inicialmente desabilitado para edição) -->
     <div>
-      <%= form.submit "Salvar Aula", class: "btn btn-primary btn shadow-sm" %>
+      <%= form.submit "Salvar Aula", class: "btn btn-primary btn shadow-sm", id: "submit-btn", disabled: !@aula.new_record? %>
     </div>
   <% end %>
 </div>
 
+<!-- Script para habilitar/desabilitar o botão de submissão -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("edit-aula-form");
+    const submitButton = document.getElementById("submit-btn");
+    let originalFormState = new FormData(form);
 
+    // Habilita/desabilita o botão de acordo com as mudanças no formulário
+    function checkForChanges() {
+      let currentFormState = new FormData(form);
+      for (let [key, value] of currentFormState.entries()) {
+        if (value !== originalFormState.get(key)) {
+          submitButton.disabled = false;
+          return;
+        }
+      }
+      submitButton.disabled = true;
+    }
 
+    // Monitora mudanças em todos os inputs e textareas
+    form.querySelectorAll("input, textarea, select").forEach(input => {
+      input.addEventListener("input", checkForChanges);
+    });
+
+    // Monitora o editor Trix para mudanças
+    document.addEventListener("trix-change", checkForChanges);
+  });
+</script>

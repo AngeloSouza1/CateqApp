@@ -20,10 +20,45 @@
     <%= stylesheet_link_tag "postagens", media: "all" %>
     <%= javascript_include_tag "trix", "actiontext", defer: true %>
     <%= stylesheet_link_tag "trix", "actiontext", media: "all" %>
-
   </head>
 
- <body>
-      <%= yield %> 
- </body>
+  <body>
+    <%= yield %>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("edit-aula-form");
+        const submitButton = document.getElementById("submit-btn");
+
+        // Se o formulário é de nova aula, habilita o botão por padrão
+        if (!form) return; // Evita erros em outras páginas
+        if (form.dataset.newRecord === "true") {
+          submitButton.disabled = false;
+          return;
+        }
+
+        let originalFormState = new FormData(form);
+
+        // Função para verificar se há alterações
+        function checkForChanges() {
+          let currentFormState = new FormData(form);
+          for (let [key, value] of currentFormState.entries()) {
+            if (value !== originalFormState.get(key)) {
+              submitButton.disabled = false;
+              return;
+            }
+          }
+          submitButton.disabled = true;
+        }
+
+        // Monitora mudanças em todos os inputs e textareas
+        form.querySelectorAll("input, textarea, select").forEach(input => {
+          input.addEventListener("input", checkForChanges);
+        });
+
+        // Monitora mudanças no editor Trix, caso seja utilizado
+        document.addEventListener("trix-change", checkForChanges);
+      });
+    </script>
+  </body>
 </html>

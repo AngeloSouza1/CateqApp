@@ -2,21 +2,20 @@
 <div class="col-md-2 d-none d-md-block">
   <%= render 'shared/sidebar' %>
 </div>
-<div class="container mt-5">
+
+  <div class="container mt-5">
     <% content_for :title, "Editing aula" %>
 
     <h1>Editando a aula</h1>
     <hr>
     <%= render "form", aula: @aula %>
-
     <br>
-
     <div>
-    
-<%= link_to "Mostrar esta aula", @aula, style: "color: #343a40;" %> |
-<%= link_to "Voltar para Aulas", aulas_path, style: "color: #343a40;" %>
-
-
-
+       <%= link_to "Mostrar esta aula", @aula, style: "color: #343a40;" %> |
+       <%= link_to "Voltar para Aulas", aulas_path, style: "color: #343a40;" %>
     </div>
 </div>
+
+
+
+
