@@ -11,7 +11,7 @@
         <h1 class="page-title">Postagens</h1>
       </header>
 
-      <div class="mb-3 ">
+      <div class="mb-3">
         <%= link_to new_postagem_path, class: 'btn btn-success' do %>
           <i class="fas fa-plus"></i> Nova Postagem
         <% end %>
@@ -21,7 +21,21 @@
         <% @postagens.each do |postagem| %>
           <div class="col-md-12 mb-4"> <!-- Agora cada card ocupa a largura total -->
             <div class="card h-100" style="max-height: 400px; overflow-y: auto;">
-              <div class="card-body">
+              <div class="card-body position-relative">
+                
+                <!-- Ícones de edição e exclusão na parte superior direita -->
+                <% if postagem.user == current_user %>
+                  <div class="position-absolute" style="top: 10px; right: 10px;">
+                    <%= link_to edit_postagem_path(postagem), class: 'text-primary me-2' do %>
+                      <i class="fas fa-edit"></i>
+                    <% end %>
+
+                    <%= button_to postagem_path(postagem), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-text-primary p-0', form: { class: 'd-inline' } do %>
+                      <i class="fas fa-trash-alt"></i>
+                    <% end %>
+                  </div>
+                <% end %>
+
                 <h5 class="card-title"><%= postagem.title %></h5>
                 <p class="card-text"><%= postagem.content.truncate(150) %></p>
                 <p class="text-muted">
@@ -44,14 +58,14 @@
                           <i class="fas fa-edit"></i>
                         <% end %>
 
-                        <%= button_to postagem_comentario_path(postagem, comentario), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-danger', form: { class: 'd-inline' } do %>
+                        <%= button_to postagem_comentario_path(postagem, comentario), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-danger p-0', form: { class: 'd-inline' } do %>
                           <i class="fas fa-trash-alt"></i>
                         <% end %>
                       <% end %>
                     </div>
                   <% end %>
                 <% else %>
-                  <p class="text-muted">Ainda não há comentários nesta postagem.</p>
+                        <p class="text-muted text-center mb-4">  Ainda não há comentários nesta postagem.</p>
                 <% end %>
               </div>
             </div>
