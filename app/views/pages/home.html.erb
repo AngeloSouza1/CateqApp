@@ -6,9 +6,8 @@
       <%= render 'shared/sidebar' %>
     </div>
 
-    <!-- Conteúdo principal ajustado -->
-    <div class="col-md-10 offset-md-2 col-sm-12">
-      
+    <!-- Conteúdo principal ajustado para 8 colunas -->
+    <div class="col-md-8">
       <!-- Texto com espaçamento aumentado e design elegante -->
       <div class="text-center mb-5 p-5" style="background-color: #f8f9fa; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         <h1 class="display-4" style="font-weight: bold; color: #34495e;"><%= @message %></h1>
@@ -18,28 +17,41 @@
       </div>
 
       <hr class="my-5">
-
       <div class="row">
-        
         <!-- Coluna para as imagens, com bordas arredondadas e efeitos -->
         <div class="col-md-6 text-center mb-4" style="background-color: #ffffff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
           <%= image_tag "imag1.jpg", alt: "Imagem Catequese 1", class: "img-fluid mb-4", style: "border-radius: 15px;" %>
         </div>
 
         <!-- Coluna para links estilizados -->
-        <div class="col-md-6  mb-4 text-center" style="background-color: #ffffff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+        <div class="col-md-6 mb-4 text-center" style="background-color: #ffffff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
           <ul class="list-unstyled">
             <li class="mb-3">
-              <%= link_to 'Orações', aulas_path, class: 'text-decoration-none  h4', style: "transition: color 0.3s ease;" %>
+              <%= link_to 'Orações', aulas_path, class: 'text-decoration-none h4', style: "transition: color 0.3s ease;" %>
             </li>
             <li class="mb-3">
-              <%= link_to 'Curiosidades', postagems_path, class: 'text-decoration-none  h4', style: "transition: color 0.3s ease;" %>
+              <%= link_to 'Curiosidades', postagems_path, class: 'text-decoration-none h4', style: "transition: color 0.3s ease;" %>
             </li>
-            
           </ul>
         </div>
       </div>
-      
     </div>
+
+    <!-- Banner à direita com 30% de largura -->
+    <div class="col-md-3" style="position: absolute; right: 0; top: 0; height: 100%; padding-top: 80px;">
+      <div class="p-3" style="background-color: #f8f9fa; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 100%;">
+        <h4 class="text-center" style="color: #34495e;">Bem-vindo!</h4>
+        <p class="text-center">Informações</p>
+       
+        <hr>
+        <!-- Exibe o nome do usuário logado -->
+        <% if user_signed_in? %>
+          <p class="text-center"><strong>Usuário:</strong> <%= current_user.email %></p>
+        <% else %>
+          <p class="text-center"><strong>Usuário:</strong> Convidado</p>
+        <% end %>
+      </div>
+    </div>
+
   </div>
 </div>

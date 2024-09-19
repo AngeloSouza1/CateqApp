@@ -38,7 +38,7 @@
                 <% end %>
 
                 <h5 class="card-title"><%= postagem.title %></h5>
-                <p class="card-text"><%= postagem.content.truncate(150) %></p>
+                <p class="card-text"><%= sanitize(postagem.content).truncate(150) %></p>
                 <p class="text-muted">
                   Postado por <%= postagem.user.email %> em <%= postagem.created_at.strftime("%d/%m/%Y") %>
                 </p>
@@ -55,13 +55,13 @@
         <p class="mt-2"><%= comentario.content %></p>
 
         <div class="d-flex justify-content-between align-items-center mt-2">
-          <!-- Exibir data de criação e atualização -->
-          <p class="text-muted mb-0">
-            Comentário postado em <%= comentario.created_at.strftime("%d/%m/%Y às %H:%M") %>
-            <% if comentario.created_at != comentario.updated_at %>
-              | Comentário alterado em <%= comentario.updated_at.strftime("%d/%m/%Y às %H:%M") %>
-            <% end %>
-          </p>
+        <!-- Exibir data de criação e atualização -->
+        <p class="text-muted mb-0" style="font-size: 13px;">
+          Comentário postado em <%= comentario.created_at.strftime("%d/%m/%Y às %H:%M") %>
+          <% if comentario.created_at != comentario.updated_at %>
+            | Comentário alterado em <%= comentario.updated_at.strftime("%d/%m/%Y às %H:%M") %>
+          <% end %>
+        </p>
 
           <!-- Links de edição e exclusão para o autor do comentário -->
           <% if comentario.user == current_user %>
@@ -83,9 +83,7 @@
   <% end %>
 </div>
 
-
-
-            </div>
+           </div>
           </div>
         <% end %>
       </div>

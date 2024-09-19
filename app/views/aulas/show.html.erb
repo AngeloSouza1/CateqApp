@@ -4,7 +4,7 @@
 </div>
 
 
-<div class="container mt-5">
+<div class="container mt-5" > 
   <!-- Título da Aula -->
   <h1><%= @aula.title %></h1>
   <hr>
@@ -14,31 +14,28 @@
     <%= image_tag "default_image.png", size: "300x200" %>
   <% end %>
   <hr>
-   <!-- Descrição da Aula -->
+  <!-- Descrição da Aula -->
   <div class="content">
     <h5>Descrição</h5>
     <p><%= simple_format(@aula.content) %></p>
   </div>
 
   <!-- Conteúdo Detalhado da Aula -->
-<div class="content mt-4" style="max-height: 380px; overflow-y: scroll;">    
-     <hr>
+  <div class="content mt-4" style="max-height: 380px; overflow-y: scroll;">
+    <hr>
     <h5>Conteúdo Detalhado</h5>
     <%= @aula.detailed_content.body %>
   </div>
 
-
-
-<hr>
+  <hr>
   <!-- Botões de ação -->
   <div class="d-flex justify-content-start mt-4">
-
     <%= link_to 'Editar Aula', edit_aula_path(@aula), class: 'btn btn-warning me-2' %>
     <%= link_to 'Voltar para Aulas', aulas_path, class: 'btn btn-secondary me-2' %>
 
-  <!-- Botão de Excluir Aula -->
-<%= button_to aula_path(@aula), method: :delete, data: { turbo_confirm: 'Tem certeza que deseja excluir esta aula?' }, class: 'btn btn-danger' do %>
-  Excluir Aula
-<% end %>
+    <!-- Botão de Excluir Aula -->
+    <%= button_to aula_path(@aula), method: :delete, data: { turbo_confirm: 'Tem certeza que deseja excluir esta aula?' }, class: 'btn btn-danger' do %>
+      Excluir Aula
+    <% end %>
   </div>
 </div>
