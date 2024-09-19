@@ -22,7 +22,7 @@ module CateqApp
     # in config/environments, which are processed later.
     #
     config.i18n.default_locale = :'pt-BR'
-    # config.time_zone = "Central Ti1me (US & Canada)"
+    config.time_zone = "Brasilia"
     # config.eager_load_paths << Rails.root.join("extras")
     
   end

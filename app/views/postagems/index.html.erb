@@ -46,29 +46,45 @@
               </div>
 
               <!-- Seção de Comentários -->
-              <div class="comments mt-3">
-                <% if postagem.comentarios.any? %>
-                  <% postagem.comentarios.each do |comentario| %>
-                    <div class="mb-4 p-3 border rounded bg-light">
-                      <strong class="text-primary"><%= comentario.user.email %>:</strong>
-                      <p class="mt-2"><%= comentario.content %></p>
 
-                      <!-- Links de edição e exclusão para o autor do comentário -->
-                      <% if comentario.user == current_user %>
-                        <%= link_to edit_postagem_comentario_path(postagem, comentario), class: 'text-warning me-2' do %>
-                          <i class="fas fa-edit"></i>
-                        <% end %>
+<div class="comments mt-3">
+  <% if postagem.comentarios.any? %>
+    <% postagem.comentarios.each do |comentario| %>
+      <div class="mb-4 p-3 border rounded bg-light">
+        <strong class="text-primary"><%= comentario.user.email %>:</strong>
+        <p class="mt-2"><%= comentario.content %></p>
 
-                        <%= button_to postagem_comentario_path(postagem, comentario), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-danger p-0', form: { class: 'd-inline' } do %>
-                          <i class="fas fa-trash-alt"></i>
-                        <% end %>
-                      <% end %>
-                    </div>
-                  <% end %>
-                <% else %>
-                        <p class="text-muted text-center mb-4">  Ainda não há comentários nesta postagem.</p>
-                <% end %>
-              </div>
+        <div class="d-flex justify-content-between align-items-center mt-2">
+          <!-- Exibir data de criação e atualização -->
+          <p class="text-muted mb-0">
+            Comentário postado em <%= comentario.created_at.strftime("%d/%m/%Y às %H:%M") %>
+            <% if comentario.created_at != comentario.updated_at %>
+              | Comentário alterado em <%= comentario.updated_at.strftime("%d/%m/%Y às %H:%M") %>
+            <% end %>
+          </p>
+
+          <!-- Links de edição e exclusão para o autor do comentário -->
+          <% if comentario.user == current_user %>
+            <div>
+              <%= link_to edit_postagem_comentario_path(postagem, comentario), class: 'text-warning me-2' do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+
+              <%= button_to postagem_comentario_path(postagem, comentario), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-danger p-0', form: { class: 'd-inline' } do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-muted text-center mb-4">Ainda não há comentários nesta postagem.</p>
+  <% end %>
+</div>
+
+
+
             </div>
           </div>
         <% end %>
