@@ -1,3 +1,4 @@
+# config/routes.rb
 Rails.application.routes.draw do
   # Rotas do Devise para autenticação
   devise_for :users
@@ -8,9 +9,16 @@ Rails.application.routes.draw do
   # Rotas para Aulas
   resources :aulas
 
-  # Rotas para Postagens (com associação ao usuário) e aninhamento de Mensagens
+  # Rotas para Postagens e Comentários
   resources :postagems do
-    resources :mensagens, only: [:create, :destroy]  # Mensagens aninhadas dentro de Postagens
+    resources :mensagens, only: [:create, :destroy]
     resources :comentarios, only: [:create, :edit, :update, :destroy]
+  end
+
+  # Rotas para Notificações
+  resources :notifications, only: [:index] do
+    member do
+      patch :mark_as_read
+    end
   end
 end

@@ -24,32 +24,55 @@ class PostagemsController < ApplicationController
   end
 
   # POST /postagems or /postagems.json
+  # def create
+  #   @postagem = Postagem.new(postagem_params)
+
+  #   respond_to do |format|
+  #     if @postagem.save
+  #       format.html { redirect_to postagems_url, notice: "Postagem was successfully created." }
+  #       format.json { render :show, status: :created, location: @postagem }
+  #     else
+  #       format.html { render :new, status: :unprocessable_entity }
+  #       format.json { render json: @postagem.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+  
   def create
     @postagem = Postagem.new(postagem_params)
-
-    respond_to do |format|
-      if @postagem.save
-        format.html { redirect_to postagems_url, notice: "Postagem was successfully created." }
-        format.json { render :show, status: :created, location: @postagem }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @postagem.errors, status: :unprocessable_entity }
-      end
+    if @postagem.save
+      Notification.create(user: @postagem.user, notifiable: @postagem, message: "Postagem criada")
+      redirect_to postagem_path(@postagem), notice: "Postagem criada com sucesso!"
+    else
+      render :new
     end
   end
+  
+
+
 
   # PATCH/PUT /postagems/1 or /postagems/1.json
+  # def update
+  #   respond_to do |format|
+  #     if @postagem.update(postagem_params)
+  #       format.html { redirect_to postagem_url(@postagem), notice: "Postagem was successfully updated." }
+  #       format.json { render :show, status: :ok, location: @postagem }
+  #     else
+  #       format.html { render :edit, status: :unprocessable_entity }
+  #       format.json { render json: @postagem.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+  
   def update
-    respond_to do |format|
-      if @postagem.update(postagem_params)
-        format.html { redirect_to postagem_url(@postagem), notice: "Postagem was successfully updated." }
-        format.json { render :show, status: :ok, location: @postagem }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @postagem.errors, status: :unprocessable_entity }
-      end
+    if @postagem.update(postagem_params)
+      Notification.create(user: @postagem.user, notifiable: @postagem, message: "Postagem atualizada")
+      redirect_to postagem_path(@postagem), notice: "Postagem atualizada com sucesso!"
+    else
+      render :edit
     end
   end
+
 
   # DELETE /postagems/1 or /postagems/1.json
   def destroy

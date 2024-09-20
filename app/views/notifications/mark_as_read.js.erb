@@ -1,0 +1,5 @@
+// Atualizar a contagem de notificações no sidebar
+let notificationCount = <%= current_user.notifications.unread.count %>;
+document.getElementById('notification-count').innerHTML = `
+  <%= link_to "Notificações (#{current_user.notifications.unread.count})", notifications_path, class: 'btn btn-info' %>
+`;

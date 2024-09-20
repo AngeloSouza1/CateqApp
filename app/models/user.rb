@@ -11,5 +11,6 @@ class User < ApplicationRecord
   has_many :postagems
   has_many :aulas
   has_many :comentarios
-
+ # Adiciona a associação de notificações
+ has_many :notifications, dependent: :destroy
 end

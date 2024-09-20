@@ -1,30 +1,46 @@
 class ComentariosController < ApplicationController
 
-  before_action :set_postagem
+  before_action :set_postagem, only: [:create, :edit, :update, :destroy]
   before_action :set_comentario, only: [:edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
+  # def create
+  #   @comentario = @postagem.comentarios.build(comentario_params)
+  #   @comentario.user = current_user
+
+  #   if @comentario.save
+  #     redirect_to postagems_path, notice: 'Comentário adicionado com sucesso.'
+  #   else
+  #     redirect_to @postagem, alert: 'Erro ao adicionar comentário.'
+  #   end
+  # end
+  # 
+  #
   def create
     @comentario = @postagem.comentarios.build(comentario_params)
     @comentario.user = current_user
-
+  
     if @comentario.save
-      redirect_to postagems_path, notice: 'Comentário adicionado com sucesso.'
+      # Criação da notificação associada ao comentário
+      Notification.create(user: @postagem.user, notifiable: @comentario)
+      redirect_to postagem_path(@postagem), notice: "Comentário adicionado!"
     else
-      redirect_to @postagem, alert: 'Erro ao adicionar comentário.'
+      redirect_to postagem_path(@postagem), alert: "Erro ao adicionar comentário."
     end
   end
-
+  
+  
+  
   def edit
     # O form de edição será renderizado automaticamente
   end
 
   def update
     if @comentario.update(comentario_params)
-      redirect_to postagems_path, notice: 'Comentário atualizado com sucesso.'
+      Notification.create(user: @comentario.user, notifiable: @comentario, message: "Comentário atualizado")
+      redirect_to postagem_path(@postagem), notice: "Comentário atualizado!"
     else
-      @comentarios = @postagem.comentarios
-      render :edit, alert: 'Erro ao atualizar o comentário.'
+      render :edit
     end
   end
 
