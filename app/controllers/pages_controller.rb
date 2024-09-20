@@ -1,8 +1,11 @@
+# app/controllers/pages_controller.rb
 class PagesController < ApplicationController
   def home
-   
-    @message = "Bem-vindo ao CateqApp!"
-    # @aulas = Aula.all.limit(3)  
-    # @postagens = Postagem.all.limit(3)  
+    # Buscar as notificações do usuário logado, caso exista
+    if user_signed_in?
+      @notifications = current_user.notifications.order(created_at: :desc).limit(5)
+    else
+      @notifications = []
+    end
   end
 end

@@ -50,13 +50,37 @@
         <% else %>
           <p class="text-center"><strong>Usuário:</strong> Convidado</p>
         <% end %>
+     <hr>
+                <ul class="list-unstyled">
+        <% if @notifications.present? %>
+          <% @notifications.each do |notification| %>
+            <li class="mb-2">
+              <% if notification.notifiable_type == 'Postagem' %>
+                <!-- Ícone e cor para Postagem -->
+                <span class="text-primary">
+                  <i class="fas fa-file-alt"></i> 
+                  <strong class="text-primary">Nova Postagem:</strong>
+                </span>
+              <% elsif notification.notifiable_type == 'Comentario' %>
+                <!-- Ícone e cor para Comentário -->
+                <span class="text-success">
+                  <i class="fas fa-comment"></i> 
+                  <strong class="text-success">Novo Comentário:</strong>
+                </span>
+              <% end %>
+              <%= notification.message %> - 
+              <span class="text-muted"><%= notification.created_at.strftime("%d/%m/%Y %H:%M") %></span>
+            </li>
+          <% end %>
+        <% else %>
+          <li class="text-muted">Sem notificações</li>
+        <% end %>
+      </ul>
+
+
+
+
       </div>
-     
-    
-
-
-
-
     </div>
   </div>
 </div>

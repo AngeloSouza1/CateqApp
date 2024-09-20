@@ -173,3 +173,21 @@
   box-shadow: none;
   outline: none;
 }
+
+.text-primary {
+  color: #007bff !important; /* Azul para novas postagens */
+}
+
+.text-success {
+  color: #28a745 !important; /* Verde para novos comentários */
+}
+
+ul.list-unstyled li {
+  font-size: 16px; /* Ajuste o tamanho da fonte */
+  padding: 10px 0;
+  border-bottom: 1px solid #eee; /* Separação entre notificações */
+}
+
+ul.list-unstyled li:last-child {
+  border-bottom: none;
+}

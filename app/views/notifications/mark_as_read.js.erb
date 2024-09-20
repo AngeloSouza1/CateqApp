@@ -1,5 +1,3 @@
-// Atualizar a contagem de notificações no sidebar
-let notificationCount = <%= current_user.notifications.unread.count %>;
-document.getElementById('notification-count').innerHTML = `
-  <%= link_to "Notificações (#{current_user.notifications.unread.count})", notifications_path, class: 'btn btn-info' %>
-`;
+// app/views/notifications/mark_as_read.js.erb
+$("li[data-notification-id='<%= @notification.id %>']").find('.btn').remove();
+$("li[data-notification-id='<%= @notification.id %>']").append('<span class="badge bg-success">Lida</span>');

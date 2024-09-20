@@ -4,18 +4,7 @@ class ComentariosController < ApplicationController
   before_action :set_comentario, only: [:edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
-  # def create
-  #   @comentario = @postagem.comentarios.build(comentario_params)
-  #   @comentario.user = current_user
 
-  #   if @comentario.save
-  #     redirect_to postagems_path, notice: 'Comentário adicionado com sucesso.'
-  #   else
-  #     redirect_to @postagem, alert: 'Erro ao adicionar comentário.'
-  #   end
-  # end
-  # 
-  #
   def create
     @comentario = @postagem.comentarios.build(comentario_params)
     @comentario.user = current_user
