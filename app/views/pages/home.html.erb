@@ -51,101 +51,117 @@
           <p class="text-center"><strong>Usuário:</strong> Convidado</p>
         <% end %>
      <hr>
-
-
-
-<ul class="list-unstyled">
-  <% if @notifications.present? %>
-    <% @notifications.each do |notification| %>
-      <li class="mb-2">
-        <% case notification.notifiable_type
-          when 'Aula' %>
-            <!-- Ícone e cor para Aula -->
-            <span class="text-warning">
-              <i class="fas fa-chalkboard-teacher"></i>
-              <strong class="text-warning">
-                <% if notification.message.downcase.include?('alterada') %>
-                  Aula Alterada:
-                <% elsif notification.message.downcase.include?('removida') %>
-                  Aula Removida:
+    <ul class="list-unstyled">
+      <% if @notifications.present? %>
+        <% @notifications.each do |notification| %>
+          <li class="mb-2">
+            <% case notification.notifiable_type
+              when 'Aula' %>
+                <!-- Ícone e cor para Aula -->
+                <span class="text-warning">
+                  <i class="fas fa-chalkboard-teacher"></i>
+                  <strong class="text-warning">
+                    <% if notification.message.downcase.include?('alterada') %>
+                      Aula Alterada:
+                    <% elsif notification.message.downcase.include?('removida') %>
+                      Aula Removida:
+                    <% else %>
+                      Aula:
+                    <% end %>
+                  </strong>
+                </span>
+                <% if notification.notifiable.present? %>
+                  <%= link_to notification.notifiable.title, aula_path(notification.notifiable) %>
                 <% else %>
-                  Aula:
+                  Aula removida
                 <% end %>
-              </strong>
-            </span>
-            <% if notification.notifiable.present? %>
-              <%= link_to notification.notifiable.title, aula_path(notification.notifiable) %>
-            <% else %>
-              Aula removida
-            <% end %>
 
-        <% when 'Postagem' %>
-            <!-- Ícone e cor para Postagem -->
-            <span class="text-primary">
-              <i class="fas fa-file-alt"></i>
-              <strong class="text-primary">
-                <% if notification.message.downcase.include?('alterada') %>
-                  Postagem Alterada:
-                <% elsif notification.message.downcase.include?('removida') %>
-                  Postagem Removida:
+            <% when 'Postagem' %>
+                <!-- Ícone e cor para Postagem -->
+                <span class="text-primary">
+                  <i class="fas fa-file-alt"></i>
+                  <strong class="text-primary">
+                    <% if notification.message.downcase.include?('alterada') %>
+                      Postagem Alterada:
+                    <% elsif notification.message.downcase.include?('removida') %>
+                      Postagem Removida:
+                    <% else %>
+                      Postagem:
+                    <% end %>
+                  </strong>
+                </span>
+                <% if notification.notifiable.present? %>
+                  <%= link_to notification.notifiable.title, postagem_path(notification.notifiable) %>
                 <% else %>
-                  Postagem:
+                  Postagem removida
                 <% end %>
-              </strong>
-            </span>
-            <% if notification.notifiable.present? %>
-              <%= link_to notification.notifiable.title, postagem_path(notification.notifiable) %>
-            <% else %>
-              Postagem removida
-            <% end %>
 
-        <% when 'Comentario' %>
-            <!-- Ícone e cor para Comentário -->
-            <span class="text-success">
-              <i class="fas fa-comment"></i>
-              <strong class="text-success">
-                <% if notification.message.downcase.include?('alterado') %>
-                  Comentário Alterado:
-                <% elsif notification.message.downcase.include?('removido') %>
-                  Comentário Removido:
+            <% when 'Comentario' %>
+                <!-- Ícone e cor para Comentário -->
+                <span class="text-success">
+                  <i class="fas fa-comment"></i>
+                  <strong class="text-success">
+                    <% if notification.message.downcase.include?('alterado') %>
+                      Comentário Alterado:
+                    <% elsif notification.message.downcase.include?('removido') %>
+                      Comentário Removido:
+                    <% else %>
+                      Comentário:
+                    <% end %>
+                  </strong>
+                </span>
+                <% if notification.notifiable.present? && notification.notifiable.postagem.present? %>
+                  <%= link_to "Comentário na postagem: #{notification.notifiable.postagem.title}", postagem_path(notification.notifiable.postagem) %>
                 <% else %>
-                  Comentário:
+                  Comentário removido
                 <% end %>
-              </strong>
-            </span>
-            <% if notification.notifiable.present? && notification.notifiable.postagem.present? %>
-              <%= link_to "Comentário na postagem: #{notification.notifiable.postagem.title}", postagem_path(notification.notifiable.postagem) %>
-            <% else %>
-              Comentário removido
-            <% end %>
 
+            <% end %>
+            <span class="text-muted"> - <%= notification.created_at.strftime("%d/%m/%Y %H:%M") %></span>
+          </li>
         <% end %>
-        <span class="text-muted"> - <%= notification.created_at.strftime("%d/%m/%Y %H:%M") %></span>
-      </li>
-    <% end %>
-  <% else %>
-    <li class="text-muted">Sem notificações</li>
-  <% end %>
-</ul>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <% else %>
+        <li class="text-muted">Sem notificações</li>
+      <% end %>
+    </ul>
+  
+   <hr>
+<div class="container mt-5">
+  <div class="row">
+    <!-- Seção com cards lado a lado -->
+    <div class="col-md-4">
+      <div class="p-4 rounded text-center" style="background-color: #f0f8ff; user-select: none; outline: none;">
+        <i class="fas fa-pencil-alt" style="color: #007bff; font-size: 24px;"></i>
+        <h3 class="mb-0 text-primary mt-2"><%= @total_postagens %></h3>
+        <p class="text-primary">Postagens</p>
       </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="p-4 rounded text-center" style="background-color: #f9f9f9; user-select: none; outline: none;">
+        <i class="fas fa-comments" style="color: #28a745; font-size: 24px;"></i>
+        <h3 class="mb-0 text-success mt-2"><%= @total_comentarios %></h3>
+        <p class="text-success">Comentários</p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="p-4 rounded text-center" style="background-color: #fffbea; user-select: none; outline: none;">
+        <i class="fas fa-chalkboard-teacher" style="color: #ffc107; font-size: 24px;"></i>
+        <h3 class="mb-0 text-warning mt-2"><%= @total_aulas %></h3>
+        <p class="text-warning">Aulas Disponíveis</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+    </div>
+  
     </div>
   </div>
 </div>
