@@ -11,17 +11,16 @@
         <h1 class="page-title">Postagens</h1>
       </header>
 
-       <div class="mb-3 text-center">
+      <div class="mb-3 text-center">
         <%= link_to new_postagem_path, class: 'btn btn-success' do %>
           <i class="fas fa-plus"></i> Nova Postagem
         <% end %>
       </div>
 
-
       <div class="row card-container">
         <% @postagens.each do |postagem| %>
           <div class="col-md-12 mb-4"> <!-- Agora cada card ocupa a largura total -->
-            <div class="card h-100" style="max-height: 400px; overflow-y: auto;">
+            <div class="card h-100">
               <div class="card-body position-relative">
                 
                 <!-- Ícones de edição e exclusão na parte superior direita -->
@@ -45,45 +44,44 @@
                 <%= link_to 'Ver Postagem', postagem_path(postagem), class: 'btn btn-primary' %>
               </div>
 
-              <!-- Seção de Comentários -->
+              <!-- Seção de Comentários com scroll -->
+              <div class="comments mt-3" style="max-height: 200px; overflow-y: auto;">
+                <% if postagem.comentarios.any? %>
+                  <% postagem.comentarios.each do |comentario| %>
+                    <div class="mb-4 p-3 border rounded bg-light">
+                      <strong class="text-primary"><%= comentario.user.email %>:</strong>
+                      <p class="mt-2"><%= comentario.content %></p>
 
-<div class="comments mt-3">
-  <% if postagem.comentarios.any? %>
-    <% postagem.comentarios.each do |comentario| %>
-      <div class="mb-4 p-3 border rounded bg-light">
-        <strong class="text-primary"><%= comentario.user.email %>:</strong>
-        <p class="mt-2"><%= comentario.content %></p>
+                      <div class="d-flex justify-content-between align-items-center mt-2">
+                        <!-- Exibir data de criação e atualização -->
+                        <p class="text-muted mb-0" style="font-size: 13px;">
+                          Comentário postado em <%= comentario.created_at.strftime("%d/%m/%Y às %H:%M") %>
+                          <% if comentario.created_at != comentario.updated_at %>
+                            | Comentário alterado em <%= comentario.updated_at.strftime("%d/%m/%Y às %H:%M") %>
+                          <% end %>
+                        </p>
 
-        <div class="d-flex justify-content-between align-items-center mt-2">
-        <!-- Exibir data de criação e atualização -->
-        <p class="text-muted mb-0" style="font-size: 13px;">
-          Comentário postado em <%= comentario.created_at.strftime("%d/%m/%Y às %H:%M") %>
-          <% if comentario.created_at != comentario.updated_at %>
-            | Comentário alterado em <%= comentario.updated_at.strftime("%d/%m/%Y às %H:%M") %>
-          <% end %>
-        </p>
+                        <!-- Links de edição e exclusão para o autor do comentário -->
+                        <% if comentario.user == current_user %>
+                          <div>
+                            <%= link_to edit_postagem_comentario_path(postagem, comentario), class: 'text-warning me-2' do %>
+                              <i class="fas fa-edit"></i>
+                            <% end %>
 
-          <!-- Links de edição e exclusão para o autor do comentário -->
-          <% if comentario.user == current_user %>
-            <div>
-              <%= link_to edit_postagem_comentario_path(postagem, comentario), class: 'text-warning me-2' do %>
-                <i class="fas fa-edit"></i>
-              <% end %>
+                            <%= button_to postagem_comentario_path(postagem, comentario), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-danger p-0', form: { class: 'd-inline' } do %>
+                              <i class="fas fa-trash-alt"></i>
+                            <% end %>
+                          </div>
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <p class="text-muted text-center mb-4">Ainda não há comentários nesta postagem.</p>
+                <% end %>
+              </div>
 
-              <%= button_to postagem_comentario_path(postagem, comentario), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-danger p-0', form: { class: 'd-inline' } do %>
-                <i class="fas fa-trash-alt"></i>
-              <% end %>
             </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  <% else %>
-    <p class="text-muted text-center mb-4">Ainda não há comentários nesta postagem.</p>
-  <% end %>
-</div>
-
-           </div>
           </div>
         <% end %>
       </div>
