@@ -54,7 +54,6 @@
 
 
 
-
 <ul class="list-unstyled">
   <% if @notifications.present? %>
     <% @notifications.each do |notification| %>
@@ -65,48 +64,60 @@
             <span class="text-warning">
               <i class="fas fa-chalkboard-teacher"></i>
               <strong class="text-warning">
-                <% if notification.message.include?('alterada') %>
+                <% if notification.message.downcase.include?('alterada') %>
                   Aula Alterada:
-                <% elsif notification.message.include?('removida') %>
+                <% elsif notification.message.downcase.include?('removida') %>
                   Aula Removida:
                 <% else %>
                   Aula:
                 <% end %>
               </strong>
             </span>
-            <%= notification.notifiable.present? ? notification.notifiable.title : 'Aula removida' %>
+            <% if notification.notifiable.present? %>
+              <%= link_to notification.notifiable.title, aula_path(notification.notifiable) %>
+            <% else %>
+              Aula removida
+            <% end %>
 
         <% when 'Postagem' %>
             <!-- Ícone e cor para Postagem -->
             <span class="text-primary">
               <i class="fas fa-file-alt"></i>
               <strong class="text-primary">
-                <% if notification.message.include?('alterada') %>
+                <% if notification.message.downcase.include?('alterada') %>
                   Postagem Alterada:
-                <% elsif notification.message.include?('removida') %>
+                <% elsif notification.message.downcase.include?('removida') %>
                   Postagem Removida:
                 <% else %>
                   Postagem:
                 <% end %>
               </strong>
             </span>
-            <%= notification.notifiable.present? ? notification.notifiable.title : 'Postagem removida' %>
+            <% if notification.notifiable.present? %>
+              <%= link_to notification.notifiable.title, postagem_path(notification.notifiable) %>
+            <% else %>
+              Postagem removida
+            <% end %>
 
         <% when 'Comentario' %>
             <!-- Ícone e cor para Comentário -->
             <span class="text-success">
               <i class="fas fa-comment"></i>
               <strong class="text-success">
-                <% if notification.message.include?('alterado') %>
+                <% if notification.message.downcase.include?('alterado') %>
                   Comentário Alterado:
-                <% elsif notification.message.include?('removido') %>
+                <% elsif notification.message.downcase.include?('removido') %>
                   Comentário Removido:
                 <% else %>
                   Comentário:
                 <% end %>
               </strong>
             </span>
-            <%= notification.notifiable.present? && notification.notifiable.postagem.present? ? "Comentário na postagem: #{notification.notifiable.postagem.title}" : 'Comentário removido' %>
+            <% if notification.notifiable.present? && notification.notifiable.postagem.present? %>
+              <%= link_to "Comentário na postagem: #{notification.notifiable.postagem.title}", postagem_path(notification.notifiable.postagem) %>
+            <% else %>
+              Comentário removido
+            <% end %>
 
         <% end %>
         <span class="text-muted"> - <%= notification.created_at.strftime("%d/%m/%Y %H:%M") %></span>
@@ -116,6 +127,9 @@
     <li class="text-muted">Sem notificações</li>
   <% end %>
 </ul>
+
+
+
 
 
 

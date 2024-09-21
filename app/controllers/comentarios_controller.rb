@@ -9,12 +9,13 @@ class ComentariosController < ApplicationController
   def create
     @comentario = @postagem.comentarios.new(comentario_params)
     @comentario.user = current_user
-  
+
     if @comentario.save
-      Notification.create(user: current_user, notifiable: @comentario, message_type: 'created')
+      # Notificação para criação de novo comentário
+      Notification.create(user: @postagem.user, notifiable: @comentario, message_type: 'created', message: "Comentário criado na postagem: #{@postagem.title}")
       redirect_to @postagem, notice: 'Comentário adicionado com sucesso.'
     else
-      render :new
+      redirect_to @postagem, alert: 'Não foi possível adicionar o comentário.'
     end
   end
   
