@@ -8,10 +8,10 @@
 
     <!-- Conteúdo principal ajustado para 8 colunas -->
     <div class="col-md-8">
-      <!-- Texto com espaçamento aumentado e design elegante -->
-      <div class="text-center mb-5 p-5" style="background-color: #f8f9fa; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-        <h1 class="display-4" style="font-weight: bold; color: #34495e;"><%= @message %></h1>
-        <p class="lead">
+    
+     <div class="text-center mb-5 p-5" style="background-color: #f8f9fa; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+             <h1>Bem-Vindo ao CateqApp</h1>
+          <p class="lead">
           O CateqApp é a sua plataforma digital de apoio à catequese. Aqui, você encontrará recursos essenciais para aprimorar o ensino religioso, organizar aulas, acompanhar postagens e se conectar com catequistas e catequizandos. Nossa missão é facilitar o aprendizado e promover a fé de maneira acessível e moderna. Explore nossas funcionalidades e prepare-se para uma jornada enriquecedora de formação espiritual.
         </p>
       </div>
@@ -51,31 +51,82 @@
           <p class="text-center"><strong>Usuário:</strong> Convidado</p>
         <% end %>
      <hr>
-                <ul class="list-unstyled">
-        <% if @notifications.present? %>
-          <% @notifications.each do |notification| %>
-            <li class="mb-2">
-              <% if notification.notifiable_type == 'Postagem' %>
-                <!-- Ícone e cor para Postagem -->
-                <span class="text-primary">
-                  <i class="fas fa-file-alt"></i> 
-                  <strong class="text-primary">Nova Postagem:</strong>
-                </span>
-              <% elsif notification.notifiable_type == 'Comentario' %>
-                <!-- Ícone e cor para Comentário -->
-                <span class="text-success">
-                  <i class="fas fa-comment"></i> 
-                  <strong class="text-success">Novo Comentário:</strong>
-                </span>
-              <% end %>
-              <%= notification.message %> - 
-              <span class="text-muted"><%= notification.created_at.strftime("%d/%m/%Y %H:%M") %></span>
-            </li>
-          <% end %>
-        <% else %>
-          <li class="text-muted">Sem notificações</li>
+
+
+
+
+<ul class="list-unstyled">
+  <% if @notifications.present? %>
+    <% @notifications.each do |notification| %>
+      <li class="mb-2">
+        <% case notification.notifiable_type
+          when 'Aula' %>
+            <!-- Ícone e cor para Aula -->
+            <span class="text-warning">
+              <i class="fas fa-chalkboard-teacher"></i>
+              <strong class="text-warning">
+                <% if notification.message.include?('alterada') %>
+                  Aula Alterada:
+                <% elsif notification.message.include?('removida') %>
+                  Aula Removida:
+                <% else %>
+                  Aula:
+                <% end %>
+              </strong>
+            </span>
+            <%= notification.notifiable.present? ? notification.notifiable.title : 'Aula removida' %>
+
+        <% when 'Postagem' %>
+            <!-- Ícone e cor para Postagem -->
+            <span class="text-primary">
+              <i class="fas fa-file-alt"></i>
+              <strong class="text-primary">
+                <% if notification.message.include?('alterada') %>
+                  Postagem Alterada:
+                <% elsif notification.message.include?('removida') %>
+                  Postagem Removida:
+                <% else %>
+                  Postagem:
+                <% end %>
+              </strong>
+            </span>
+            <%= notification.notifiable.present? ? notification.notifiable.title : 'Postagem removida' %>
+
+        <% when 'Comentario' %>
+            <!-- Ícone e cor para Comentário -->
+            <span class="text-success">
+              <i class="fas fa-comment"></i>
+              <strong class="text-success">
+                <% if notification.message.include?('alterado') %>
+                  Comentário Alterado:
+                <% elsif notification.message.include?('removido') %>
+                  Comentário Removido:
+                <% else %>
+                  Comentário:
+                <% end %>
+              </strong>
+            </span>
+            <%= notification.notifiable.present? && notification.notifiable.postagem.present? ? "Comentário na postagem: #{notification.notifiable.postagem.title}" : 'Comentário removido' %>
+
         <% end %>
-      </ul>
+        <span class="text-muted"> - <%= notification.created_at.strftime("%d/%m/%Y %H:%M") %></span>
+      </li>
+    <% end %>
+  <% else %>
+    <li class="text-muted">Sem notificações</li>
+  <% end %>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

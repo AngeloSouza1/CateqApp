@@ -7,13 +7,25 @@ class Notification < ApplicationRecord
   def message
     case notifiable
     when Comentario
-      "Novo comentário em sua postagem: '#{notifiable.postagem.title}'"
+      case self.message_type
+      when 'created'
+        "Novo comentário na postagem: '#{notifiable.postagem.title}'"
+      when 'updated'
+        "Comentário alterado na postagem: '#{notifiable.postagem.title}'"
+      when 'deleted'
+        "Comentário removido da postagem: '#{notifiable.postagem.title}'"
+      end
     when Postagem
-      "Nova postagem: '#{notifiable.title}'"
+      case self.message_type
+      when 'created'
+        "Nova postagem: '#{notifiable.title}'"
+      when 'updated'
+        "Postagem alterada: '#{notifiable.title}'"
+      when 'deleted'
+        "Postagem removida: '#{notifiable.title}'"
+      end
     else
       "Nova notificação"
     end
   end
-
-
 end

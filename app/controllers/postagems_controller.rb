@@ -1,5 +1,5 @@
 class PostagemsController < ApplicationController
-  before_action :set_postagem, only: %i[ show edit update destroy ]
+  before_action :set_postagem, only: [:show, :edit, :update, :destroy]
 
   # GET /postagems or /postagems.json
   def index
@@ -23,65 +23,34 @@ class PostagemsController < ApplicationController
   def edit
   end
 
-  # POST /postagems or /postagems.json
-  # def create
-  #   @postagem = Postagem.new(postagem_params)
-
-  #   respond_to do |format|
-  #     if @postagem.save
-  #       format.html { redirect_to postagems_url, notice: "Postagem was successfully created." }
-  #       format.json { render :show, status: :created, location: @postagem }
-  #     else
-  #       format.html { render :new, status: :unprocessable_entity }
-  #       format.json { render json: @postagem.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-  
   def create
     @postagem = Postagem.new(postagem_params)
+    @postagem.user = current_user
+  
     if @postagem.save
-      Notification.create(user: @postagem.user, notifiable: @postagem, message: "Postagem criada")
-      redirect_to postagem_path(@postagem), notice: "Postagem criada com sucesso!"
+      Notification.create(user: current_user, notifiable: @postagem, message_type: 'created')
+      redirect_to @postagem, notice: 'Postagem criada com sucesso.'
     else
       render :new
     end
   end
   
-
-
-
-  # PATCH/PUT /postagems/1 or /postagems/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @postagem.update(postagem_params)
-  #       format.html { redirect_to postagem_url(@postagem), notice: "Postagem was successfully updated." }
-  #       format.json { render :show, status: :ok, location: @postagem }
-  #     else
-  #       format.html { render :edit, status: :unprocessable_entity }
-  #       format.json { render json: @postagem.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-  
   def update
+    @postagem = Postagem.find(params[:id])
+    
     if @postagem.update(postagem_params)
-      Notification.create(user: @postagem.user, notifiable: @postagem, message: "Postagem atualizada")
-      redirect_to postagem_path(@postagem), notice: "Postagem atualizada com sucesso!"
+      Notification.create(user: current_user, notifiable: @postagem, message_type: 'updated')
+      redirect_to @postagem, notice: 'Postagem atualizada com sucesso.'
     else
       render :edit
     end
   end
-
-
-  # DELETE /postagems/1 or /postagems/1.json
+  
   def destroy
-    @postagem.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to postagems_url, notice: "Postagem was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @postagem = Postagem.find(params[:id])
+    @postagem.destroy
+    Notification.create(user: current_user, notifiable: @postagem, message_type: 'deleted')
+    redirect_to postagems_path, notice: 'Postagem excluída com sucesso.'
   end
 
   private

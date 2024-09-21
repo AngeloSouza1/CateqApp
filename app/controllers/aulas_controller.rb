@@ -20,45 +20,36 @@ class AulasController < ApplicationController
   def edit
   end
 
-  # POST /aulas or /aulas.json
-  def create
-    @aula = Aula.new(aula_params)
-    @aula.user = current_user
-
-    respond_to do |format|
+    def create
+      @aula = Aula.new(aula_params)
+      @aula.user = current_user
+  
       if @aula.save
-        format.html { redirect_to aula_url(@aula), notice: "Aula was successfully created." }
-        format.json { render :show, status: :created, location: @aula }
+        Notification.create(user: current_user, notifiable: @aula, message: "Aula criada: #{@aula.title}")
+        redirect_to @aula, notice: 'Aula criada com sucesso.'
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @aula.errors, status: :unprocessable_entity }
+        render :new
       end
     end
-  end
-
-  # PATCH/PUT /aulas/1 or /aulas/1.json
-  def update
-    respond_to do |format|
+  
+    def update
+      @aula = Aula.find(params[:id])
       if @aula.update(aula_params)
-        format.html { redirect_to aula_url(@aula), notice: "Aula atualizada com sucesso." }
-        format.json { render :show, status: :ok, location: @aula }
+        Notification.create(user: current_user, notifiable: @aula, message: "Aula alterada: #{@aula.title}")
+        redirect_to @aula, notice: 'Aula alterada com sucesso.'
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @aula.errors, status: :unprocessable_entity }
+        render :edit
       end
     end
-  end
-
-  # DELETE /aulas/1 or /aulas/1.json
-  def destroy
-    @aula.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to aulas_url, notice: "Aula was successfully destroyed." }
-      format.json { head :no_content }
+  
+    def destroy
+      @aula = Aula.find(params[:id])
+      @aula.destroy
+      Notification.create(user: current_user, notifiable: @aula, message: "Aula removida: #{@aula.title}")
+      redirect_to aulas_url, notice: 'Aula removida com sucesso.'
     end
-  end
 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_aula

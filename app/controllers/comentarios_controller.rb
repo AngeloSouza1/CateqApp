@@ -1,46 +1,40 @@
 class ComentariosController < ApplicationController
-
   before_action :set_postagem, only: [:create, :edit, :update, :destroy]
   before_action :set_comentario, only: [:edit, :update, :destroy]
   before_action :authorize_user!, only: [:edit, :update, :destroy]
 
-
+  def edit
+  end
+  
   def create
-    @comentario = @postagem.comentarios.build(comentario_params)
+    @comentario = @postagem.comentarios.new(comentario_params)
     @comentario.user = current_user
   
     if @comentario.save
-      # Criação da notificação associada ao comentário
-      Notification.create(user: @postagem.user, notifiable: @comentario)
-      redirect_to postagem_path(@postagem), notice: "Comentário adicionado!"
+      Notification.create(user: current_user, notifiable: @comentario, message_type: 'created')
+      redirect_to @postagem, notice: 'Comentário adicionado com sucesso.'
     else
-      redirect_to postagem_path(@postagem), alert: "Erro ao adicionar comentário."
+      render :new
     end
   end
   
-  
-  
-  def edit
-    # O form de edição será renderizado automaticamente
-  end
-
   def update
+    @comentario = @postagem.comentarios.find(params[:id])
+  
     if @comentario.update(comentario_params)
-      Notification.create(user: @comentario.user, notifiable: @comentario, message: "Comentário atualizado")
-      redirect_to postagem_path(@postagem), notice: "Comentário atualizado!"
+      Notification.create(user: current_user, notifiable: @comentario, message_type: 'updated')
+      redirect_to @postagem, notice: 'Comentário atualizado com sucesso.'
     else
       render :edit
     end
   end
-
+  
   def destroy
-    if @comentario.destroy
-      redirect_to postagems_path, notice: 'Comentário removido com sucesso.'
-    else
-      redirect_to postagems_path, alert: 'Erro ao remover o comentário.'
-    end
+    @comentario = @postagem.comentarios.find(params[:id])
+    @comentario.destroy
+    Notification.create(user: current_user, notifiable: @comentario, message_type: 'deleted')
+    redirect_to @postagem, notice: 'Comentário removido com sucesso.'
   end
-
   private
 
   def set_postagem
