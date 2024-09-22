@@ -46,7 +46,14 @@
         <hr>
         <!-- Exibe o nome do usuário logado -->
         <% if user_signed_in? %>
-          <p class="text-center"><strong>Usuário:</strong> <%= current_user.email %></p>
+              <p class="text-center">
+              <i class="fas fa-user" style="color: #001f3f;"></i> 
+            <strong>Usuário:</strong>
+            <span style="color: #001f3f">            
+              <%= current_user.email %>
+            </span>
+</p>
+
         <% else %>
           <p class="text-center"><strong>Usuário:</strong> Convidado</p>
         <% end %>
@@ -146,10 +153,10 @@
     </div>
 
     <div class="col-md-4">
-      <div class="p-4 rounded text-center" style="background-color: #fffbea; user-select: none; outline: none;">
-        <i class="fas fa-chalkboard-teacher" style="color: #ffc107; font-size: 24px;"></i>
-        <h3 class="mb-0 text-warning mt-2"><%= @total_aulas %></h3>
-        <p class="text-warning">Aulas Disponíveis</p>
+      <div class="p-4 rounded text-center" style="background-color: ; user-select: none; outline: none;">
+        <i class="fas fa-chalkboard-teacher" style="color:#b58906; font-size: 24px;"></i>
+        <h3 class="mb-0  mt-2" style = "color:#b58906"><%= @total_aulas %></h3>
+        <p style = "color:#b58906">Aulas Disponíveis</p>
       </div>
     </div>
   </div>

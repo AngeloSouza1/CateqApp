@@ -19,7 +19,7 @@ class ComentariosController < ApplicationController
   
       # Notificação para o autor do comentário
       Notification.create(user: current_user, notifiable: @comentario, message_type: 'created', message: "Você comentou na postagem: #{@postagem.title}")
-      redirect_to @postagem, notice: 'Comentário adicionado com sucesso.'
+      redirect_to postagems_path, notice: 'Comentário adicionado com sucesso.'
     else
       render :new
     end
@@ -36,7 +36,7 @@ class ComentariosController < ApplicationController
   
       # Notificação para o autor do comentário
       Notification.create(user: current_user, notifiable: @comentario, message_type: 'updated', message: "Seu comentário na postagem: #{@postagem.title} foi alterado.")
-      redirect_to @postagem, notice: 'Comentário atualizado com sucesso.'
+      redirect_to postagems_path, notice: 'Comentário atualizado com sucesso.'
     else
       render :edit
     end
@@ -49,7 +49,7 @@ class ComentariosController < ApplicationController
     @comentario = @postagem.comentarios.find(params[:id])
     @comentario.destroy
     Notification.create(user: current_user, notifiable: @comentario, message_type: 'deleted')
-    redirect_to @postagem, notice: 'Comentário removido com sucesso.'
+    redirect_to postagems_path, notice: 'Comentário removido com sucesso.'
   end
   private
 
