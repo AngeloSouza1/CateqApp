@@ -21,4 +21,9 @@ Rails.application.routes.draw do
       patch :mark_as_read
     end
   end
+
+# Rotas Oracoes
+resources :oracoes
+
+
 end

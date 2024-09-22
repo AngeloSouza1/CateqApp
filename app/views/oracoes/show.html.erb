@@ -1,0 +1,6 @@
+<h1><%= @oracao.titulo %></h1>
+<p><%= @oracao.conteudo %></p>
+
+<%= link_to 'Editar', edit_oracao_path(@oracao), class: 'btn btn-warning' %>
+<%= button_to 'Excluir', oracao_path(@oracao), method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %>
+<%= link_to 'Voltar', oracoes_path, class: 'btn btn-secondary' %>

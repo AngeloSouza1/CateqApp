@@ -1,0 +1,56 @@
+<div class="container-fluid mt-5">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-2 d-none d-md-block">
+      <%= render 'shared/sidebar' %>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="col-md-8 offset-md-0">
+      <header class="page-header">
+        <h1 class="page-title">Orações</h1>
+      </header>
+
+      <!-- Botão para nova oração -->
+      <div class="mb-3 text-center">
+        <%= link_to new_oracao_path, class: 'btn btn-success' do %>
+          <i class="fas fa-plus"></i> Nova Oração
+        <% end %>
+      </div>
+
+      <!-- Lista de Orações -->
+      <div class="row card-container">
+        <% @oracoes.each do |oracao| %>
+          <div class="col-md-12 mb-4">
+            <div class="card h-100">
+              <div class="card-body position-relative">
+                
+                <!-- Ícones de edição e exclusão para o autor da oração -->
+                <% if oracao.user == current_user %>
+                  <div class="position-absolute" style="top: 10px; right: 10px;">
+                    <%= link_to edit_oracao_path(oracao), class: 'text-primary me-2' do %>
+                      <i class="fas fa-edit"></i>
+                    <% end %>
+
+                    <%= button_to oracao_path(oracao), method: :delete, data: { confirm: 'Tem certeza que deseja excluir?' }, class: 'btn btn-link text-danger p-0' do %>
+                      <i class="fas fa-trash-alt"></i>
+                    <% end %>
+                  </div>
+                <% end %>
+
+                <!-- Exibição do título da oração -->
+                <h5 class="card-title"><%= oracao.titulo %></h5>
+
+                <!-- Link para ver o conteúdo completo da oração -->
+                <%= link_to 'Ver Oração', oracao_path(oracao), class: 'btn btn-primary' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Banner Postagem -->
+    <%= render 'shared/banner_postagem' %>
+  </div>
+</div>

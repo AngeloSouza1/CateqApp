@@ -124,3 +124,46 @@ Mensagem.find_or_create_by!(content: 'Quando será a próxima aula?', user: cate
 Mensagem.find_or_create_by!(content: 'Obrigado pela aula, foi muito esclarecedora!', user: catequizando1, receiver: catequista1, postagem: postagem1)
 
 puts "Mensagens criadas!"
+
+
+# Criando Orações
+puts "Criando orações..."
+
+oracoes = [
+  { 
+    titulo: "Pai Nosso", 
+    conteudo: <<-TEXT
+Pai nosso que estais no céu, santificado seja o vosso nome, venha a nós o vosso reino, seja feita a vossa vontade, assim na terra como no céu. O pão nosso de cada dia nos dai hoje, perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido, e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.
+    TEXT
+  },
+  { 
+    titulo: "Ave Maria", 
+    conteudo: <<-TEXT
+Ave Maria, cheia de graça, o Senhor é convosco. Bendita sois vós entre as mulheres e bendito é o fruto do vosso ventre, Jesus. Santa Maria, Mãe de Deus, rogai por nós pecadores, agora e na hora de nossa morte. Amém.
+    TEXT
+  },
+  { 
+    titulo: "Credo", 
+    conteudo: <<-TEXT
+Creio em Deus Pai todo-poderoso, criador do céu e da terra; e em Jesus Cristo, seu único Filho, nosso Senhor; que foi concebido pelo poder do Espírito Santo; nasceu da Virgem Maria; padeceu sob Pôncio Pilatos; foi crucificado, morto e sepultado; desceu à mansão dos mortos; ressuscitou ao terceiro dia; subiu aos céus; está sentado à direita de Deus Pai todo-poderoso, de onde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo, na santa Igreja Católica, na comunhão dos santos, na remissão dos pecados, na ressurreição da carne, na vida eterna. Amém.
+    TEXT
+  },
+  { 
+    titulo: "Glória ao Pai", 
+    conteudo: <<-TEXT
+Glória ao Pai, ao Filho e ao Espírito Santo, como era no princípio, agora e sempre. Amém.
+    TEXT
+  },
+  { 
+    titulo: "Salve Rainha", 
+    conteudo: <<-TEXT
+Salve, Rainha, Mãe de Misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos os degredados filhos de Eva, a vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei, e, depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce sempre Virgem Maria! Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém.
+    TEXT
+  }
+]
+
+oracoes.each do |oracao|
+  Oracao.find_or_create_by!(titulo: oracao[:titulo], conteudo: oracao[:conteudo], user: catequista1)
+end
+
+puts "Orações criadas!"
