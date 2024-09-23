@@ -22,7 +22,9 @@
     <!-- Campo para o conteúdo da postagem -->
     <div class="mb-3">
       <%= form.label :content, "Conteúdo da Postagem", class: "form-label fw-bold" %>
-      <%= form.rich_text_area :content, class: "form-control form-control-underline", placeholder: "Escreva o conteúdo da postagem" %>
+      <%= form.rich_text_area :content, class: "form-control form-control-underline w-100", placeholder: "Escreva o conteúdo da postagem", style: "height: 450px; overflow-y: auto;" %>
+
+    
     </div>
     
   
