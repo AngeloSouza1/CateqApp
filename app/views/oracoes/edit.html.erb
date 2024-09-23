@@ -1,15 +1,47 @@
-<%= form_with(model: @oracao, local: true) do |form| %>
-  <div class="form-group">
-    <%= form.label :titulo %>
-    <%= form.text_field :titulo, class: 'form-control' %>
+<!-- Sidebar -->
+<div class="col-md-2 d-none d-md-block">
+  <%= render 'shared/sidebar' %>
+</div>
+
+
+<div class="container mt-5">
+
+     <!-- Conteúdo principal -->
+     <header >
+        <h1 >Editar Oração</h1>
+      </header>
+      <br>
+      <%= form_with(model: @oracao, local: true) do |form| %>
+        <!-- Exibição de erros -->
+        <% if @oracao.errors.any? %>
+          <div class="alert alert-danger">
+            <h4><%= pluralize(@oracao.errors.count, "erro") %> impediu que a oração fosse salva:</h4>
+            <ul>
+              <% @oracao.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <!-- Campo para o título da oração -->
+        <div class="mb-3">
+          <%= form.label :titulo, "Título da Oração", class: "form-label fw-bold" %>
+          <%= form.text_field :titulo, class: "form-control form-control-underline w-100", placeholder: "Digite o título da oração" %>
+        </div>
+
+        <!-- Campo para o conteúdo da oração -->
+        <div class="mb-3">
+          <%= form.label :conteudo, "Conteúdo da Oração", class: "form-label fw-bold" %>
+          <%= form.rich_text_area :conteudo, class: "form-control form-control-underline w-100", placeholder: "Escreva o conteúdo da oração", style: "height: 450px; overflow-y: auto;" %>
+        </div>
+
+        <!-- Botões de ação -->
+        <div class="d-flex justify-content-end gap-2">
+          <%= form.submit 'Salvar Oração', class: 'btn btn-primary' %>
+          <%= link_to 'Voltar', oracoes_path, class: 'btn btn-secondary' %>
+        </div>
+      <% end %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :conteudo %>
-    <%= form.text_area :conteudo, class: 'form-control' %>
-  </div>
-
-  <%= form.submit class: 'btn btn-primary' %>
-<% end %>
-
-<%= link_to 'Voltar', oracoes_path, class: 'btn btn-secondary' %>
+</div>

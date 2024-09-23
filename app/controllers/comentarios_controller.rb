@@ -10,18 +10,12 @@ class ComentariosController < ApplicationController
   def create
     @comentario = @postagem.comentarios.new(comentario_params)
     @comentario.user = current_user
-  
+
     if @comentario.save
-      # Notificação para o autor da postagem (se for diferente do que está comentando)
-      if @postagem.user != current_user
-        Notification.create(user: @postagem.user, notifiable: @comentario, message_type: 'created', message: "Novo comentário na sua postagem: #{@postagem.title}")
-      end
-  
-      # Notificação para o autor do comentário
-      Notification.create(user: current_user, notifiable: @comentario, message_type: 'created', message: "Você comentou na postagem: #{@postagem.title}")
-      redirect_to postagems_path, notice: 'Comentário adicionado com sucesso.'
+      redirect_to postagem_path(@postagem), notice: 'Comentário adicionado com sucesso.'
     else
-      render :new
+      flash[:alert] = "Erro ao adicionar comentário. Verifique o conteúdo."
+      redirect_to postagem_path(@postagem) # Redireciona de volta para a postagem
     end
   end
   

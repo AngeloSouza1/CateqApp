@@ -6,12 +6,12 @@
     </div>
 
     <!-- Conteúdo principal -->
-   
+  
       <header class="page-header">
         <h1 class="page-title">Nova Oração</h1>
       </header>
 
-      <%= form_with(model: @oracao, local: true) do |form| %>
+      <%= form_with(model: @oracao, local: true, id: "oracao-form") do |form| %>
         <!-- Exibição de erros -->
         <% if @oracao.errors.any? %>
           <div class="alert alert-danger">
@@ -27,21 +27,41 @@
         <!-- Campo para o título da oração -->
         <div class="mb-3">
           <%= form.label :titulo, "Título da Oração", class: "form-label fw-bold" %>
-          <%= form.text_field :titulo, class: "form-control form-control-underline w-100", placeholder: "Digite o título da oração" %>
+          <%= form.text_field :titulo, class: "form-control form-control-underline w-100", placeholder: "Digite o título da oração", id: "titulo" %>
         </div>
 
         <!-- Campo para o conteúdo da oração com scroll lock e limite de colunas -->
         <div class="mb-3">
           <%= form.label :conteudo, "Conteúdo da Oração", class: "form-label fw-bold" %>
-          <%= form.rich_text_area :conteudo, class: "form-control form-control-underline w-100", placeholder: "Escreva o conteúdo da oração", style: "height: 450px; overflow-y: auto;" %>
+          <%= form.text_area :conteudo, class: "form-control form-control-underline w-100", placeholder: "Escreva o conteúdo da oração", id: "conteudo", style: "height: 450px; overflow-y: auto;" %>
         </div>
 
+        <!-- Botões de ação -->
         <div class="d-flex justify-content-end gap-2">
-         <%= form.submit 'Salvar Oração', class: 'btn btn-primary' %>
-         <%= link_to 'Voltar', oracoes_path, class: 'btn btn-secondary' %>
-    </div>
-
+          <%= form.submit 'Salvar Oração', class: 'btn btn-primary', id: 'submit-btn', disabled: true %>
+          <%= link_to 'Voltar', oracoes_path, class: 'btn btn-secondary' %>
+        </div>
       <% end %>
-    
+
+      <!-- Script para habilitar o botão apenas quando os campos estiverem preenchidos -->
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const submitBtn = document.getElementById('submit-btn');
+          const tituloInput = document.getElementById('titulo');
+          const conteudoInput = document.getElementById('conteudo');
+
+          function checkInputs() {
+            if (tituloInput.value.trim() !== "" && conteudoInput.value.trim() !== "") {
+              submitBtn.disabled = false;
+            } else {
+              submitBtn.disabled = true;
+            }
+          }
+
+          tituloInput.addEventListener('input', checkInputs);
+          conteudoInput.addEventListener('input', checkInputs);
+        });
+      </script>
+   
   </div>
 </div>

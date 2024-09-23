@@ -3,7 +3,7 @@ class OracoesController < ApplicationController
   before_action :authenticate_user! # Garante que o usuário esteja logado para criar, editar ou excluir
 
   def index
-    @oracoes = Oracao.all # Ou para mostrar apenas as orações do usuário logado: Oracao.where(user: current_user)
+    @oracoes = Oracao.order(created_at: :desc) #  para mostrar apenas as orações do usuário logado: Oracao.where(user: current_user)
   end
 
   def show
