@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Rotas para fichas cadastrais (somente catequistas podem gerenciar)
-  resources :ficha_cadastrals, only: [:index, :new, :create, :edit, :update]
+  resources :ficha_cadastrals, only: [:index, :new, :create, :edit, :update, :destroy]
 
   # Definir a rota raiz (página inicial) do aplicativo
   root 'pages#home'

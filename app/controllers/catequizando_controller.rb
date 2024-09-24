@@ -6,6 +6,7 @@ class CatequizandoController < ApplicationController
     @aulas = Aula.order(created_at: :desc)
     @oracoes = Oracao.order(created_at: :desc)
     @postagens = Postagem.order(created_at: :desc)
+    @ficha_cadastral = FichaCadastral.find_by(email: current_user.email)
   end
 
   private

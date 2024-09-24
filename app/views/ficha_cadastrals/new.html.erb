@@ -1,35 +1,46 @@
-<h1>Nova Ficha Cadastral</h1>
+    <%= render 'shared/sidebar' %>
+  
+        <div class="container mt-5">
+        <% content_for :title, "New ficha_cadastral" %>
+          <h1>Nova Ficha Cadastral</h1>
+        <hr>
+        <br>
+    <%= form_with(model: @ficha_cadastral, url: ficha_cadastrals_path, local: true) do |form| %>
+      <div class="mb-3">
+        <%= form.label :nome, "Nome", class: "form-label fw-bold" %>
+        <%= form.text_field :nome, class: "form-control form-control-underline", placeholder: "Digite o nome do catequisando" %>
+      </div>
 
-<%= form_with(model: @ficha_cadastral, url: ficha_cadastrals_path, local: true) do |form| %>
-  <div class="form-group">
-    <%= form.label :nome %>
-    <%= form.text_field :nome, class: 'form-control' %>
-  </div>
+       <div class="mb-3">
+        <%= form.label :email,  "E-mail", class: "form-label fw-bold" %>
+        <%= form.text_field :email,  class: "form-control form-control-underline", placeholder: "Digite o e-mail do catequisando" %>
+     </div>
 
-  <div class="form-group">
-    <%= form.label :endereco %>
-    <%= form.text_field :endereco, class: 'form-control' %>
-  </div>
+     <div class="mb-3">
+       <%= form.label :endereco , "Endereço", class: "form-label fw-bold" %>
+       <%= form.text_field :endereco, class: "form-control form-control-underline", placeholder: "Digite o endereço" %>
+      </div>
 
-  <div class="form-group">
-    <%= form.label :data_nascimento %>
-    <%= form.date_field :data_nascimento, class: 'form-control' %>
-  </div>
+       <div class="mb-3">
+         <%= form.label :data_nascimento , "Data de Nascimento",  class: "form-label fw-bold" %>
+         <%= form.date_field :data_nascimento, class: "form-control form-control-underline", placeholder: "Digite a data de nascimento" %>
+      </div>
 
-  <div class="form-group">
-    <%= form.label :telefone %>
-    <%= form.telephone_field :telefone, class: 'form-control' %>
-  </div>
+      
+       <div class="mb-3">
+          <%= form.label :telefone , "Telefone",  class: "form-label fw-bold" %>
+          <%= form.telephone_field :telefone, class: "form-control form-control-underline", placeholder: "Digite o telefone" %>
+      </div>
 
-  <div class="form-group">
-    <%= form.label :faltas %>
-    <%= form.number_field :faltas, class: 'form-control' %>
-  </div>
+       <div class="container mt-5">
+        <%= form.submit 'Salvar',   class: "btn btn-primary" %>
+        <div>
+        <br>
+        <%= link_to "Voltar para Gerenciador", ficha_cadastrals_path, style: "color: #343a40;" %>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= form.label :nota_desempenho %>
-    <%= form.number_field :nota_desempenho, step: 0.1, class: 'form-control' %>
-  </div>
 
-  <%= form.submit 'Salvar', class: 'btn btn-primary' %>
-<% end %>
+    <% end %>
+       
+

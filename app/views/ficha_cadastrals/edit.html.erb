@@ -1,38 +1,28 @@
-<h1>Editar Ficha Cadastral</h1>
-
-<%= form_with(model: @ficha_cadastral, url: ficha_cadastrals_path, local: true) do |form| %>
-  <div class="form-group mb-3">
-    <%= form.label :nome, "Nome Completo", class: "form-label fw-bold" %>
+<%= form_with(model: @ficha_cadastral, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :nome %>
     <%= form.text_field :nome, class: 'form-control' %>
   </div>
 
-  <div class="form-group mb-3">
-    <%= form.label :endereco, "Endereço", class: "form-label fw-bold" %>
+     <div class="mb-3">
+        <%= form.label :email,  "E-mail", class: "form-label fw-bold" %>
+        <%= form.text_field :email,  class: "form-control form-control-underline", placeholder: "Digite o e-mail do catequisando" %>
+     </div>
+
+  <div class="form-group">
+    <%= form.label :endereco %>
     <%= form.text_field :endereco, class: 'form-control' %>
   </div>
 
-  <div class="form-group mb-3">
-    <%= form.label :data_nascimento, "Data de Nascimento", class: "form-label fw-bold" %>
-    <%= form.date_field :data_nascimento, class: 'form-control' %>
+  <div class="form-group">
+    <%= form.label :data_nascimento %>
+    <%= form.date_select :data_nascimento, class: 'form-control' %>
   </div>
 
-  <div class="form-group mb-3">
-    <%= form.label :telefone, "Telefone para Contato", class: "form-label fw-bold" %>
+  <div class="form-group">
+    <%= form.label :telefone %>
     <%= form.telephone_field :telefone, class: 'form-control' %>
   </div>
 
-  <div class="form-group mb-3">
-    <%= form.label :faltas, "Número de Faltas", class: "form-label fw-bold" %>
-    <%= form.number_field :faltas, class: 'form-control' %>
-  </div>
-
-  <div class="form-group mb-3">
-    <%= form.label :nota_desempenho, "Nota de Desempenho", class: "form-label fw-bold" %>
-    <%= form.number_field :nota_desempenho, step: 0.1, class: 'form-control' %>
-  </div>
-
-  <div class="d-flex justify-content-end gap-2">
   <%= form.submit 'Atualizar Ficha', class: 'btn btn-primary' %>
-  <%= link_to 'Cancelar', catequizando_dashboard_path, class: 'btn btn-secondary' %>
-</div>
 <% end %>

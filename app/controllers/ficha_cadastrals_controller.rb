@@ -1,7 +1,13 @@
 class FichaCadastralsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_ficha_cadastral, only: [:edit, :update]
+  before_action :set_ficha_cadastral, only: [:edit, :update, :destroy]
   before_action :authorize_catequista, only: [:new, :create, :edit, :update]
+
+  
+
+  def index
+    @ficha_cadastrals = FichaCadastral.all
+  end
 
   # Catequistas podem criar novas fichas para catequizandos
   def new
@@ -13,7 +19,7 @@ class FichaCadastralsController < ApplicationController
     @ficha_cadastral = FichaCadastral.new(ficha_cadastral_params)
     @ficha_cadastral.user = current_user
     if @ficha_cadastral.save
-      redirect_to catequizando_dashboard_path, notice: 'Ficha cadastral criada com sucesso.'
+      redirect_to ficha_cadastrals_path, notice: 'Ficha cadastral criada com sucesso.'
     else
       render :new
     end
@@ -29,10 +35,15 @@ end
     @ficha_cadastral = FichaCadastral.find(params[:id])
 
     if @ficha_cadastral.update(ficha_cadastral_params)
-      redirect_to catequizando_dashboard_path, notice: 'Ficha cadastral atualizada com sucesso.'
+      redirect_to ficha_cadastrals_path, notice: 'Ficha Cadastral atualizada com sucesso.'
     else
       render :edit
     end
+  end
+
+  def destroy
+    @ficha_cadastral.destroy
+    redirect_to ficha_cadastrals_path, notice: 'Ficha cadastral foi excluída com sucesso.'
   end
 
   private
@@ -48,6 +59,6 @@ end
 
 
   def ficha_cadastral_params
-    params.require(:ficha_cadastral).permit(:nome, :endereco, :data_nascimento, :telefone, :faltas, :nota_desempenho, :user_id)
+    params.require(:ficha_cadastral).permit(:nome, :endereco, :data_nascimento, :telefone, :faltas, :nota_desempenho, :user_id, :email)
   end
 end
