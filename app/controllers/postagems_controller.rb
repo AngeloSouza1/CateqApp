@@ -1,6 +1,6 @@
 class PostagemsController < ApplicationController
   before_action :set_postagem, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorize_catequista!, only: [:new, :create, :edit, :update, :destroy]
   # GET /postagems or /postagems.json
   def index
     # @postagens = Postagem.includes(:comentarios).all
@@ -62,5 +62,11 @@ class PostagemsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def postagem_params
       params.require(:postagem).permit(:title, :content, :user_id)
+    end
+
+    def authorize_catequista!
+      unless current_user.catequista?
+        redirect_to postagems_path, alert: 'Acesso negado. Apenas catequistas podem gerenciar postagens.'
+      end
     end
 end

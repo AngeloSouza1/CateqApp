@@ -1,7 +1,7 @@
 class AulasController < ApplicationController
   before_action :set_aula, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-
+  before_action :authorize_catequista!, except: [:index, :show]
   # GET /aulas or /aulas.json
   def index
     @aulas = Aula.order(:created_at)
@@ -60,4 +60,12 @@ class AulasController < ApplicationController
     def aula_params
       params.require(:aula).permit(:title, :content, :detailed_content, :image)
     end
+
+    def authorize_catequista!
+      unless current_user.catequista?
+        redirect_to root_path, alert: 'Acesso negado. Apenas catequistas podem acessar esta página.'
+      end
+    end
+
+
 end

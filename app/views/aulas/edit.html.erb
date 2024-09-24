@@ -11,8 +11,10 @@
     <%= render "form", aula: @aula %>
     <br>
     <div>
-       <%= link_to "Mostrar esta aula", @aula, style: "color: #343a40;" %> |
-       <%= link_to "Voltar para Aulas", aulas_path, style: "color: #343a40;" %>
+      <% if current_user.catequista? %>
+          <%= link_to "Mostrar esta aula", @aula, style: "color: #343a40;" %> |
+          <%= link_to "Voltar para Aulas", aulas_path, style: "color: #343a40;" %>
+      <% end %>    
     </div>
 </div>
 

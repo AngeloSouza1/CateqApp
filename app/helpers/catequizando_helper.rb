@@ -1,0 +1,2 @@
+module CatequizandoHelper
+end

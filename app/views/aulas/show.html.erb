@@ -30,14 +30,17 @@
   <hr>
   <!-- Botões de ação -->
   <div class="d-flex justify-content-start mt-4">
-    <%= link_to 'Editar Aula', edit_aula_path(@aula), class: 'btn btn-warning me-2' %>
+    <% if current_user.catequista? %>
+      <%= link_to 'Editar Aula', edit_aula_path(@aula), class: 'btn btn-warning me-2' %>
+    <% end %>
     <%= link_to 'Voltar para Aulas', aulas_path, class: 'btn btn-secondary me-2' %>
 
     <!-- Botão de Excluir Aula -->
-    <%= button_to aula_path(@aula), method: :delete, data: { turbo_confirm: 'Tem certeza que deseja excluir esta aula?' }, class: 'btn btn-danger' do %>
-      Excluir Aula
+   <% if current_user.catequista? %>   
+      <%= button_to aula_path(@aula), method: :delete, data: { turbo_confirm: 'Tem certeza que deseja excluir esta aula?' }, class: 'btn btn-danger' do %>
+        Excluir Aula
+      <% end %>
     <% end %>
-
 
 
 

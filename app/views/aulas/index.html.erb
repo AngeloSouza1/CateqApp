@@ -9,11 +9,14 @@
       </header>
 
       <!-- Botão Adicionar Aula ao centro -->
-      <div class="mb-3 text-center">
-        <%= link_to new_aula_path, class: 'btn btn-success' do %>
-          <i class="fas fa-plus"></i> Adicionar Aula
-        <% end %>
-      </div>
+    
+      <% if current_user.catequista? %>
+        <div class="mb-3 text-center">
+          <%= link_to new_aula_path, class: 'btn btn-success' do %>
+            <i class="fas fa-plus"></i> Adicionar Aula
+          <% end %>
+        </div>
+      <% end %>  
 
       <!-- Cards das Aulas com imagem -->
       <div class="row card-container">

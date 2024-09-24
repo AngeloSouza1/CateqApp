@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <h1 class="text-center">Bem-vindo, <%= current_user.email %>!</h1>
+  <p class="text-center">Acompanhe suas aulas, postagens e orações abaixo.</p>
+
+  <!-- Aulas Recentes -->
+  <div class="mt-4">
+    <h2>Aulas Recentes</h2>
+    <div class="row">
+      <% @aulas.each do |aula| %>
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= aula.title %></h5>
+              <p class="card-text"><%= aula.content.truncate(100) %></p>
+              <%= link_to 'Ver Aula', aula_path(aula), class: 'btn btn-primary btn-sm' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Orações -->
+  <div class="mt-4">
+    <h2>Orações</h2>
+    <div class="row">
+      <% @oracoes.each do |oracao| %>
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= oracao.titulo %></h5>
+              <%= link_to 'Ver Oração', oracao_path(oracao), class: 'btn btn-primary btn-sm' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Postagens -->
+  <div class="mt-4">
+    <h2>Postagens</h2>
+    <div class="row">
+      <% @postagens.each do |postagem| %>
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= postagem.title %></h5>
+              <p class="card-text"><%= postagem.content.truncate(100) %></p>
+              <%= link_to 'Ver Postagem', postagem_path(postagem), class: 'btn btn-primary btn-sm' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

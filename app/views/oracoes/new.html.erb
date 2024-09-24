@@ -7,10 +7,10 @@
 
     <!-- Conteúdo principal -->
   
-      <header class="page-header">
-        <h1 class="page-title">Nova Oração</h1>
+      <header >
+        <h1>Nova Oração</h1>
       </header>
-
+      <hr>   
       <%= form_with(model: @oracao, local: true, id: "oracao-form") do |form| %>
         <!-- Exibição de erros -->
         <% if @oracao.errors.any? %>
@@ -23,7 +23,7 @@
             </ul>
           </div>
         <% end %>
-
+        <br>
         <!-- Campo para o título da oração -->
         <div class="mb-3">
           <%= form.label :titulo, "Título da Oração", class: "form-label fw-bold" %>

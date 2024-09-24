@@ -1,4 +1,3 @@
-# config/routes.rb
 Rails.application.routes.draw do
   # Rotas do Devise para autenticação
   devise_for :users
@@ -22,8 +21,11 @@ Rails.application.routes.draw do
     end
   end
 
-# Rotas Oracoes
-resources :oracoes
+  # Rotas para Orações
+  resources :oracoes
 
-
+  # Rotas para o ambiente de Catequizando
+  namespace :catequizando do
+    get 'dashboard', to: 'dashboard#index', as: 'dashboard'
+  end
 end
