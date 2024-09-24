@@ -1,33 +1,40 @@
 <!-- app/views/shared/_sidebar.html.erb -->
-     <div class="col-md-2 sidebar">
-      <div class="logo mb-4 text-center">
-<%= image_tag "info2.png", alt: "Logotipo", class: "img-fluid logo-small" %>
-      </div>
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <%= link_to 'Página Inicial', root_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Aulas', aulas_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Postagens', postagems_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-            
-        </li>
-      </ul>
- 
+<div class="col-md-2 sidebar">
+  <div class="logo mb-4 text-center">
+    <%= image_tag "info2.png", alt: "Logotipo", class: "img-fluid logo-small" %>
+  </div>
 
+  <ul class="nav flex-column">
+    <li class="nav-item">
+      <%= link_to 'Página Inicial', root_path, class: 'nav-link' %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Aulas', aulas_path, class: 'nav-link' %>
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Postagens', postagems_path, class: 'nav-link' %>
+    </li>
 
- <div class="position-absolute text-center" style="bottom: 20px; width: 90%;">
+    <!-- Link para o Dashboard do Catequizando, visível apenas para catequizandos -->
+    <% if current_user.catequisando? %>
+      <li class="nav-item">
+        <%= link_to 'Catequizando', catequizando_dashboard_path, class: 'nav-link' %>
+      </li>
+    <% end %>
+
+    <!-- Link para Gerenciar Fichas Cadastrais, visível apenas para Catequistas -->
+    <% if current_user.catequista? %>
+      <li class="nav-item">
+        <%= link_to 'Gerenciar Fichas Cadastrais', ficha_cadastrals_path, class: 'nav-link' %>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="position-absolute text-center" style="bottom: 20px; width: 90%;">
     <% if user_signed_in? %>
-      <!-- Mostrar o botão de Deslogar se o usuário estiver logado -->
       <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "btn btn-danger", style: "width: 80%;" %>
     <% else %>
-      <!-- Mostrar o botão de Login se o usuário não estiver logado -->
       <%= link_to "Entrar", new_user_session_path, class: "btn btn-primary", style: "width: 80%;" %>
     <% end %>
   </div>
-
- </div>
+</div>

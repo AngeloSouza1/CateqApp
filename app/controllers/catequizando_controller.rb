@@ -9,8 +9,7 @@ class CatequizandoController < ApplicationController
   end
 
   private
-
   def authorize_catequizando
-    redirect_to root_path, alert: 'Acesso não autorizado!' unless current_user.catequizando?
+    redirect_to root_path, alert: 'Acesso não autorizado!' unless current_user.catequisando?
   end
 end

@@ -53,7 +53,7 @@
             <span style="color: #001f3f">            
               <%= current_user.email %>
             </span>
-</p>
+         </p>
 
         <% else %>
           <p class="text-center"><strong>Usuário:</strong> Convidado</p>
@@ -137,13 +137,15 @@
 <div class="container mt-5">
   <div class="row">
     <!-- Seção com cards lado a lado -->
-    <div class="col-md-4">
-      <div class="p-4 rounded text-center" style="background-color: #f0f8ff; user-select: none; outline: none;">
-        <i class="fas fa-pencil-alt" style="color: #007bff; font-size: 24px;"></i>
-        <h3 class="mb-0 text-primary mt-2"><%= @total_postagens %></h3>
-        <p class="text-primary">Postagens</p>
+     <% if current_user.catequista? %>  
+      <div class="col-md-4">
+        <div class="p-4 rounded text-center" style="background-color: #f0f8ff; user-select: none; outline: none;">
+          <i class="fas fa-pencil-alt" style="color: #007bff; font-size: 24px;"></i>
+          <h3 class="mb-0 text-primary mt-2"><%= @total_postagens %></h3>
+          <p class="text-primary">Postagens</p>
+        </div>
       </div>
-    </div>
+     <% end %> 
 
     <div class="col-md-4">
       <div class="p-4 rounded text-center" style="background-color: #f9f9f9; user-select: none; outline: none;">

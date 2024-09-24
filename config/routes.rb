@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   # Rotas do Devise para autenticação
   devise_for :users
 
+  # Rotas para fichas cadastrais (somente catequistas podem gerenciar)
+  resources :ficha_cadastrals, only: [:index, :new, :create, :edit, :update]
+
   # Definir a rota raiz (página inicial) do aplicativo
   root 'pages#home'
 
@@ -24,8 +27,6 @@ Rails.application.routes.draw do
   # Rotas para Orações
   resources :oracoes
 
-  # Rotas para o ambiente de Catequizando
-  namespace :catequizando do
-    get 'dashboard', to: 'dashboard#index', as: 'dashboard'
-  end
+  # Rota para o Dashboard do Catequizando
+  get 'catequizando/dashboard', to: 'catequizando#dashboard', as: 'catequizando_dashboard'
 end

@@ -12,6 +12,13 @@ class User < ApplicationRecord
   has_many :aulas
   has_many :comentarios
   has_many :notifications, dependent: :destroy
+  has_one :ficha_cadastral, dependent: :destroy
+
+  # Validações
+  validates :role, presence: true, inclusion: { in: roles.keys }
+
+  # Definir papel padrão
+  before_create :set_default_role
 
   # Métodos de verificação de permissões
   def catequista?
@@ -20,5 +27,11 @@ class User < ApplicationRecord
 
   def catequisando?
     role == 'catequisando'
+  end
+
+  private
+
+  def set_default_role
+    self.role ||= 'catequisando'
   end
 end

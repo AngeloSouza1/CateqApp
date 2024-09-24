@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_22_183852) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_24_192615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_22_183852) do
     t.index ["user_id"], name: "index_comentarios_on_user_id"
   end
 
+  create_table "ficha_cadastrals", force: :cascade do |t|
+    t.string "nome"
+    t.string "endereco"
+    t.date "data_nascimento"
+    t.string "telefone"
+    t.integer "faltas"
+    t.decimal "nota_desempenho"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_ficha_cadastrals_on_user_id"
+  end
+
   create_table "mensagems", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -133,6 +146,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_22_183852) do
   add_foreign_key "aulas", "users"
   add_foreign_key "comentarios", "postagems"
   add_foreign_key "comentarios", "users"
+  add_foreign_key "ficha_cadastrals", "users"
   add_foreign_key "mensagems", "postagems"
   add_foreign_key "mensagems", "users"
   add_foreign_key "notifications", "users"
