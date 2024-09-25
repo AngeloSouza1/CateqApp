@@ -1,8 +1,6 @@
     <%= render 'shared/sidebar' %>
 
-
-
-<div class="container mt-5">
+       <div class="container mt-5">
         <% content_for :title, "New ficha_cadastral" %>
           <h1>Cadastro do Catequisando</h1>
         <hr>
@@ -39,8 +37,6 @@
         <%= form.label :catequista_id, "Catequista",class: "form-label fw-bold" %> 
         <%= form.collection_select :catequista_id, User.where(role: 'catequista'), :id, :email, prompt: "Selecione o Catequista", class: "form-control form-control-underline" %>
       </div>
-
-
 
       <div class="container mt-5">
         <%= form.submit 'Atualizar Cadastro',   class: "btn btn-primary" %>
