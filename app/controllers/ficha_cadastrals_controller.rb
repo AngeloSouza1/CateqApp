@@ -3,9 +3,22 @@ class FichaCadastralsController < ApplicationController
   before_action :set_ficha_cadastral, only: [:edit, :update, :destroy]
   before_action :authorize_catequista, only: [:new, :create, :edit, :update]
 
+ 
   def index
-    @ficha_cadastrals = FichaCadastral.all
+    if params[:catequista_id].present?
+      # Filtra pelos catequizandos do catequista selecionado
+      @ficha_cadastrals = FichaCadastral.where(catequista_id: params[:catequista_id])
+    else
+      # Mostra todos os catequizandos ordenados por updated_at e created_at
+      @ficha_cadastrals = FichaCadastral.order(updated_at: :desc, created_at: :desc)
+    end
+  
+    # Carrega todos os catequistas para o dropdown de seleção
+    @catequistas = User.where(role: 'catequista')
   end
+  
+    
+ 
 
   def new
     @ficha_cadastral = FichaCadastral.new

@@ -2,24 +2,34 @@
 <div class="col-md-2 d-none d-md-block">
   <%= render 'shared/sidebar' %>
 </div>
- 
+
 <div class="container-fluid mt-5">
   <div class="col-md-10 offset-md-2">
     <header class="page-header">
-        <h1 class="page-title">Gerenciar Fichas Cadastrais</h1>
+      <h1 class="page-title">Gerenciar Fichas Cadastrais</h1>
     </header>
 
-   <div class="mb-3 text-center">
+    <div class="mb-3 text-center">
       <%= link_to new_ficha_cadastral_path, class: 'btn btn-success' do %>
-          <i class="fas fa-plus"></i> Novo Cadastro
+        <i class="fas fa-plus"></i> Novo Cadastro
       <% end %>
-   </div>
+    </div>
     <br>
 
+    <!-- Filtro por Catequista -->
+    <div class="mb-3">
+      <%= form_with url: ficha_cadastrals_path, method: :get, local: true do |form| %>
+        <div class="d-flex justify-content-center gap-2">
+          <%= form.collection_select :catequista_id, @catequistas, :id, :email, prompt: "Filtrar por Catequista", class: 'form-control w-50' %>
+          <%= form.submit 'Filtrar', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+
     <!-- Envolver a tabela em um div com altura fixa e overflow -->
-    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-      <table class="table">
-        <thead>
+    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+      <table class="table table-hover table-bordered">
+        <thead class="thead-dark" style="position: sticky; top: 0; z-index: 1; background-color: #343a40;">
           <tr>
             <th>Nome</th>
             <th>E-mail</th>
@@ -50,12 +60,12 @@
             <% end %>
           <% else %>
             <tr>
-              <td colspan="5">Nenhum registro encontrado.</td>
+              <td colspan="7" class="text-center">Nenhum registro encontrado.</td>
             </tr>
           <% end %>
         </tbody>
       </table>
-    </div> <!-- Fim do div com scroll -->
+    </div> 
 
   </div>    
 </div>
