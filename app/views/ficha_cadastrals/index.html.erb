@@ -15,42 +15,47 @@
       <% end %>
    </div>
     <br>
-    <table class="table">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>E-mail</th>
-      <th>Endereço</th>
-      <th>Data de Nascimento</th>
-      <th>Telefone</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-<tbody>
-  <% if @ficha_cadastrals.present? %>
-    <% @ficha_cadastrals.each do |ficha| %>
-      <tr>
-        <td><%= ficha.nome %></td>
-        <td><%= ficha.email %></td>
-        <td><%= ficha.endereco %></td>
-        <td><%= ficha.data_nascimento %></td>
-        <td><%= ficha.telefone %></td>
-        <td>
-          <div class="d-flex gap-2">
-            <%= link_to 'Editar', edit_ficha_cadastral_path(ficha), class: 'btn btn-warning' %>
-            <%= button_to 'Excluir', ficha_cadastral_path(ficha), method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %>
-          </div>
-        </td>
-      </tr>
-    <% end %>
-  <% else %>
-    <tr>
-      <td colspan="5">Nenhum registro encontrado.</td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
 
-</div>    
+    <!-- Envolver a tabela em um div com altura fixa e overflow -->
+    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Catequista</th>
+            <th>Endereço</th>
+            <th>Data de Nascimento</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @ficha_cadastrals.present? %>
+            <% @ficha_cadastrals.each do |ficha| %>
+              <tr>
+                <td><%= ficha.nome %></td>
+                <td><%= ficha.email %></td>
+                <td><%= ficha.catequista&.email || "Sem catequista" %></td>
+                <td><%= ficha.endereco %></td>
+                <td><%= ficha.data_nascimento %></td>
+                <td><%= ficha.telefone %></td>
+                <td>
+                  <div class="d-flex gap-2">
+                    <%= link_to 'Editar', edit_ficha_cadastral_path(ficha), class: 'btn btn-warning' %>
+                    <%= button_to 'Excluir', ficha_cadastral_path(ficha), method: :delete, data: { confirm: 'Tem certeza?' }, class: 'btn btn-danger' %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="5">Nenhum registro encontrado.</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div> <!-- Fim do div com scroll -->
 
-</div>  
+  </div>    
+</div>

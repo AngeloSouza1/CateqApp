@@ -4,36 +4,39 @@
 </div>
 
 <div class="container mt-5">
-  <h1 class>Bem-vindo, <%= current_user.email %>!</h1>
+  <h1 >Bem-vindo, <%= current_user.email %>!</h1>
 
- <hr>
- <br>
-    <div class="card-header">
-      <h3>Ficha Cadastral</h3>
-    </div>
+  <hr>
+  <br>
+  <div class="card-header">
+    <h3>Ficha Cadastral</h3>
+  </div>
+  <br>
+  <div class="card-body">
+    <% if @ficha_cadastral.present? %>
+      <!-- Adicionando borda e padding ao redor dos dados -->
+      <div class="border p-4 rounded">
+        <p style="font-size: 1.10rem"><strong>Nome:</strong> <%= @ficha_cadastral.nome %></p>
+        <p style="font-size: 1.10rem"><strong>Email:</strong> <%= @ficha_cadastral.email %></p> 
+        <p style="font-size: 1.10rem"><strong>Catequista:</strong> <%= @ficha_cadastral.catequista&.email || "Não associado a nenhum catequista" %></p>
+        <p style="font-size: 1.10rem"><strong>Endereço:</strong> <%= @ficha_cadastral.endereco %></p>
+        <p style="font-size: 1.10rem"><strong>Data de Nascimento:</strong> <%= @ficha_cadastral.data_nascimento %></p>
+        <p style="font-size: 1.10rem"><strong>Telefone:</strong> <%= @ficha_cadastral.telefone %></p>
+      </div>
 
-    <div class="card-body">
-      <% if @ficha_cadastral.present? %>
-        <p><strong>Nome:</strong> <%= @ficha_cadastral.nome %></p>
-        <p><strong>Email:</strong> <%= @ficha_cadastral.email %></p> <!-- Campo de email da ficha cadastral -->
-        <p><strong>Endereço:</strong> <%= @ficha_cadastral.endereco %></p>
-        <p><strong>Data de Nascimento:</strong> <%= @ficha_cadastral.data_nascimento %></p>
-        <p><strong>Telefone:</strong> <%= @ficha_cadastral.telefone %></p>
-
-        <% if current_user.catequista? %>
-          <!-- Exibe o botão de edição apenas para o catequista -->
-          <%= link_to 'Editar Ficha Cadastral', edit_ficha_cadastral_path(@ficha_cadastral), class: 'btn btn-warning' %>
-        <% end %>
-      
-      <% else %>
-        <!-- Exibe mensagem e botão para criar ficha se não houver uma existente -->
-        <p>Você ainda não preencheu sua ficha cadastral.</p>
-
-        <% if current_user.catequista? %>
-          <!-- Exibe botão para preencher ficha, apenas para catequista -->
-          <%= link_to 'Preencher Ficha Cadastral', new_ficha_cadastral_path, class: 'btn btn-primary' %>
-        <% end %>
+      <% if current_user.catequista? %>
+        <!-- Exibe o botão de edição apenas para o catequista -->
+        <%= link_to 'Editar Ficha Cadastral', edit_ficha_cadastral_path(@ficha_cadastral), class: 'btn btn-warning mt-3' %>
       <% end %>
-    </div>
- 
+
+    <% else %>
+      <!-- Exibe mensagem e botão para criar ficha se não houver uma existente -->
+      <p style="font-size: 1.10rem">Você ainda não preencheu sua ficha cadastral.</p>
+
+      <% if current_user.catequista? %>
+        <!-- Exibe botão para preencher ficha, apenas para catequista -->
+        <%= link_to 'Preencher Ficha Cadastral', new_ficha_cadastral_path, class: 'btn btn-primary mt-3' %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
