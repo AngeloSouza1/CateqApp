@@ -78,4 +78,17 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 
- 
+  .form-control-underline {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    padding: 5px 10px;
+    font-size: 16px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-control-underline:focus {
+    border-bottom-color: #007bff; /* Altera a cor ao focar no input */
+  }

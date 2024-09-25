@@ -13,7 +13,8 @@ class User < ApplicationRecord
   has_many :comentarios
   has_many :notifications, dependent: :destroy
   has_one :ficha_cadastral, dependent: :destroy
-
+  has_many :fichas_cadastrais, foreign_key: 'catequista_id', class_name: 'FichaCadastral'
+  has_one :ficha_cadastral, foreign_key: 'user_id'
   # Validações
   validates :role, presence: true, inclusion: { in: roles.keys }
 

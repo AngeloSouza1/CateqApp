@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_24_232207) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_25_103219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,12 +78,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_24_232207) do
     t.string "endereco"
     t.date "data_nascimento"
     t.string "telefone"
-    t.integer "faltas"
-    t.decimal "nota_desempenho"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
+    t.integer "catequista_id"
+    t.index ["catequista_id"], name: "index_ficha_cadastrals_on_catequista_id"
     t.index ["user_id"], name: "index_ficha_cadastrals_on_user_id"
   end
 
@@ -148,6 +148,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_24_232207) do
   add_foreign_key "comentarios", "postagems"
   add_foreign_key "comentarios", "users"
   add_foreign_key "ficha_cadastrals", "users"
+  add_foreign_key "ficha_cadastrals", "users", column: "catequista_id"
   add_foreign_key "mensagems", "postagems"
   add_foreign_key "mensagems", "users"
   add_foreign_key "notifications", "users"
